@@ -1,0 +1,28 @@
+
+L
+java:S1068"*Remove this unused "client" private field.(µ±¤Öşÿÿÿÿ8 ÅÜñĞ.
+r	java:S117L"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Äß›ùÿÿÿÿ8ÊÔ›ñĞ.
+N
+java:S1144-"1Remove this unused private "RecreateKeys" method.(Â©Â¬8ñğ°ñĞ.
+s	java:S116""RRename this field "MD5Salt" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÜËùÃûÿÿÿÿ8ºÊ®ñĞ.
+r	java:S117/"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆ­¾ıûÿÿÿÿ8ÊÔ›ñĞ.
+j	java:S100-"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Â©Â¬8ñğ°ñĞ.
+V
+java:S4719G"9Replace charset name argument with StandardCharsets.UTF_8(°µÑ¦8ñğ°ñĞ.
+[
+java:S4719<"9Replace charset name argument with StandardCharsets.UTF_8(ïÁüÿÿÿÿ8ñğ°ñĞ.
+m	java:S1171"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿¯´ë8ÊÔ›ñĞ.
+F
+java:S1905.")Remove this unnecessary cast to "String".(×ş«º8ñğ°ñĞ.
+b
+java:S2259D"@A "NullPointerException" could be thrown; "md" is nullable here.(ĞôÍÏÿÿÿÿÿ8®–£ñĞ.
+v
+java:S2259L"TA "NullPointerException" could be thrown; "bytesOfPrivatePassword" is nullable here.(Äß›ùÿÿÿÿ8‡®£ñĞ.
+r	java:S1170"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Œ‘Ğôüÿÿÿÿ8ÊÔ›ñĞ.
+m	java:S117A"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ôÓİ8ÊÔ›ñĞ.
+q
+java:S2259A"TA "NullPointerException" could be thrown; "bytesOfGatewayPassword" is nullable here.(ôÓİ8‡®£ñĞ.
+G
+java:S1068"*Remove this unused "device" private field.(±ÆÏ8 ÅÜñĞ.
+F
+java:S1905.")Remove this unnecessary cast to "String".(×ş«º8ñğ°ñĞ.
