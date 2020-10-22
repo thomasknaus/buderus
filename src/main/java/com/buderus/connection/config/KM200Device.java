@@ -2,6 +2,9 @@
  * Decompiled with CFR 0.150.
  * 
  * Could not load the following classes:
+ *  com.google.gson.JsonObject
+ *  com.google.gson.JsonParseException
+ *  com.google.gson.JsonParser
  *  javax.xml.bind.DatatypeConverter
  *  org.apache.commons.lang.StringUtils
  *  org.slf4j.Logger
@@ -9,35 +12,42 @@
  */
 package com.buderus.connection.config;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import javax.xml.bind.DatatypeConverter;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.DatatypeConverter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class KM200Device {
-    private static final Logger logger = LoggerFactory.getLogger(KM200Device.class);
-    protected String ip4Address = null;
-    protected String gatewayPassword = null;
-    protected String privatePassword = null;
-    protected String charSet = null;
-    protected byte[] cryptKeyInit = null;
-    protected byte[] cryptKeyPriv = null;
-    protected byte[] MD5Salt = null;
-    HashMap<String, KM200CommObject> serviceMap = new HashMap();
-    List<String> blacklistMap = new ArrayList<String>();
-    List<KM200CommObject> virtualList = null;
-    protected Boolean inited = false;
+    private final Logger logger = LoggerFactory.getLogger(KM200Device.class);
+    private final JsonParser jsonParser = new JsonParser();
+    private final KM200Cryption comCryption;
+    private final KM200Comm<KM200Device> deviceCommunicator;
+    protected String ip4Address;
+    protected String gatewayPassword;
+    protected String privatePassword;
+    protected String charSet;
+    protected byte[] cryptKeyInit;
+    protected byte[] cryptKeyPriv;
+    protected byte[] md5Salt;
+    public Map<String, KM200ServiceObject> serviceTreeMap = new HashMap<String, KM200ServiceObject>();
+    private List<String> blacklistMap;
+    public List<KM200ServiceObject> virtualList;
+    protected boolean isIited;
 
     public KM200Device() {
-        this.blacklistMap.add("/gateway/firmware");
-        this.virtualList = new ArrayList<KM200CommObject>();
+        this.setBlacklistMap(new ArrayList<String>());
+        this.getBlacklistMap().add("/gateway/firmware");
+        this.virtualList = new ArrayList<KM200ServiceObject>();
+        this.comCryption = new KM200Cryption(this);
+        this.deviceCommunicator = new KM200Comm(this);
     }
 
     public Boolean isConfigured() {
@@ -45,40 +55,6 @@ public class KM200Device {
             return true;
         }
         return false;
-    }
-
-    private void RecreateKeys() {
-        if (StringUtils.isNotBlank((String)this.gatewayPassword) && StringUtils.isNotBlank((String)this.privatePassword) && this.MD5Salt != null) {
-            byte[] MD5_K1 = null;
-            byte[] MD5_K2_Init = null;
-            byte[] MD5_K2_Private = null;
-            byte[] bytesOfGatewayPassword = null;
-            byte[] bytesOfPrivatePassword = null;
-            MessageDigest md = null;
-            try {
-                md = MessageDigest.getInstance("MD5");
-            }
-            catch (NoSuchAlgorithmException e) {
-                logger.error("No such algorithm, MD5: {}", (Object)e.getMessage());
-            }
-            bytesOfGatewayPassword = this.gatewayPassword.getBytes(StandardCharsets.UTF_8);
-            byte[] CombParts1 = new byte[bytesOfGatewayPassword.length + this.MD5Salt.length];
-            System.arraycopy(bytesOfGatewayPassword, 0, CombParts1, 0, bytesOfGatewayPassword.length);
-            System.arraycopy(this.MD5Salt, 0, CombParts1, bytesOfGatewayPassword.length, this.MD5Salt.length);
-            MD5_K1 = md.digest(CombParts1);
-            MD5_K2_Init = md.digest(this.MD5Salt);
-            bytesOfPrivatePassword = this.privatePassword.getBytes(StandardCharsets.UTF_8);
-            byte[] CombParts2 = new byte[bytesOfPrivatePassword.length + this.MD5Salt.length];
-            System.arraycopy(this.MD5Salt, 0, CombParts2, 0, this.MD5Salt.length);
-            System.arraycopy(bytesOfPrivatePassword, 0, CombParts2, this.MD5Salt.length, bytesOfPrivatePassword.length);
-            MD5_K2_Private = md.digest(CombParts2);
-            this.cryptKeyInit = new byte[MD5_K1.length + MD5_K2_Init.length];
-            System.arraycopy(MD5_K1, 0, this.cryptKeyInit, 0, MD5_K1.length);
-            System.arraycopy(MD5_K2_Init, 0, this.cryptKeyInit, MD5_K1.length, MD5_K2_Init.length);
-            this.cryptKeyPriv = new byte[MD5_K1.length + MD5_K2_Private.length];
-            System.arraycopy(MD5_K1, 0, this.cryptKeyPriv, 0, MD5_K1.length);
-            System.arraycopy(MD5_K2_Private, 0, this.cryptKeyPriv, MD5_K1.length, MD5_K2_Private.length);
-        }
     }
 
     public String getIP4Address() {
@@ -93,6 +69,10 @@ public class KM200Device {
         return this.privatePassword;
     }
 
+    public byte[] getMD5Salt() {
+        return this.md5Salt;
+    }
+
     public byte[] getCryptKeyInit() {
         return this.cryptKeyInit;
     }
@@ -105,70 +85,16 @@ public class KM200Device {
         return this.charSet;
     }
 
-    public Boolean getInited() {
-        return this.inited;
+    public boolean getInited() {
+        return this.isIited;
     }
 
-    public void listAllServices() {
-        if (this.serviceMap != null) {
-            logger.info("##################################################################");
-            logger.info("List of avalible services");
-            logger.info("readable;writeable;recordable;virtual;type;service;value;allowed;min;max");
-            for (KM200CommObject object : this.serviceMap.values()) {
-                if (object == null) continue;
-                String val = "";
-                String valPara = "";
-                logger.debug("List type: {} service: {}", (Object)object.getServiceType(), (Object)object.getFullServiceName());
-                String type = object.getServiceType();
-                if (type == null) {
-                    type = new String();
-                }
-                if (type.equals("stringValue") || type.equals("floatValue")) {
-                    val = object.getValue().toString();
-                    if (object.getValueParameter() != null) {
-                        List valParas;
-                        if (type.equals("stringValue")) {
-                            valParas = (List)object.getValueParameter();
-                            for (int i = 0; i < valParas.size(); ++i) {
-                                if (i > 0) {
-                                    valPara = String.valueOf(valPara) + "|";
-                                }
-                                valPara = String.valueOf(valPara) + (String)valParas.get(i);
-                            }
-                            valPara = String.valueOf(valPara) + ";;";
-                        }
-                        if (type.equals("floatValue")) {
-                            valParas = (List)object.getValueParameter();
-                            valPara = String.valueOf(valPara) + ";";
-                            if (valParas.size() == 2) {
-                                valPara = String.valueOf(valPara) + valParas.get(0);
-                                valPara = String.valueOf(valPara) + ";";
-                                valPara = String.valueOf(valPara) + valParas.get(1);
-                            } else {
-                                logger.debug("Value parameter for float != 2, this shouldn't happen");
-                                valPara = String.valueOf(valPara) + ";";
-                            }
-                        }
-                    } else {
-                        valPara = String.valueOf(valPara) + ";;";
-                    }
-                } else {
-                    val = "";
-                    valPara = ";";
-                }
-                logger.info("{};{};{};{};{};{};{};{}", new Object[]{object.getReadable().toString(), object.getWriteable().toString(), object.getRecordable().toString(), object.getVirtual().toString(), type, object.getFullServiceName(), val, valPara});
-            }
-            logger.info("##################################################################");
-        }
+    public List<String> getBlacklistMap() {
+        return this.blacklistMap;
     }
 
-    public void resetAllUpdates() {
-        if (this.serviceMap != null) {
-            for (KM200CommObject object : this.serviceMap.values()) {
-                if (object == null) continue;
-                object.setUpdated(false);
-            }
-        }
+    public void setBlacklistMap(List<String> blacklistMap) {
+        this.blacklistMap = blacklistMap;
     }
 
     public void setIP4Address(String ip) {
@@ -177,29 +103,213 @@ public class KM200Device {
 
     public void setGatewayPassword(String password) {
         this.gatewayPassword = password;
-        this.RecreateKeys();
+        this.comCryption.recreateKeys();
     }
 
     public void setPrivatePassword(String password) {
         this.privatePassword = password;
-        this.RecreateKeys();
+        this.comCryption.recreateKeys();
     }
 
     public void setMD5Salt(String salt) {
-        this.MD5Salt = DatatypeConverter.parseHexBinary((String)salt);
-        this.RecreateKeys();
+        this.md5Salt = DatatypeConverter.parseHexBinary((String)salt);
+        this.comCryption.recreateKeys();
     }
 
     public void setCryptKeyPriv(String key) {
         this.cryptKeyPriv = DatatypeConverter.parseHexBinary((String)key);
     }
 
+    public void setCryptKeyPriv(byte[] key) {
+        this.cryptKeyPriv = key;
+    }
+
+    public void setCryptKeyInit(byte[] key) {
+        this.cryptKeyInit = key;
+    }
+
     public void setCharSet(String charset) {
         this.charSet = charset;
     }
 
-    public void setInited(Boolean Init) {
-        this.inited = Init;
+    public void setInited(boolean inited) {
+        this.isIited = inited;
+    }
+
+    public void setMaxNbrRepeats(Integer maxNbrRepeats) {
+        this.deviceCommunicator.setMaxNbrRepeats(maxNbrRepeats);
+    }
+
+    public void listAllServices() {
+        if (this.serviceTreeMap != null) {
+            this.logger.debug("##################################################################");
+            this.logger.debug("List of avalible services");
+            this.logger.debug("readable;writeable;recordable;virtual;type;service;value;allowed;min;max;unit");
+            this.printAllServices(this.serviceTreeMap);
+            this.logger.debug("##################################################################");
+        }
+    }
+
+    public void printAllServices(Map<String, KM200ServiceObject> actTreeMap) {
+        if (actTreeMap != null) {
+            for (KM200ServiceObject object : actTreeMap.values()) {
+                if (object == null) continue;
+                String val = "";
+                String valPara = "";
+                this.logger.debug("List type: {} service: {}", (Object)object.getServiceType(), (Object)object.getFullServiceName());
+                String type = object.getServiceType();
+                if (type == null) {
+                    type = new String();
+                }
+                if ("stringValue".equals(type) || "floatValue".equals(type)) {
+                    val = object.getValue().toString();
+                    if (object.getValueParameter() != null) {
+                        List valParas;
+                        if ("stringValue".equals(type)) {
+                            valParas = (List)object.getValueParameter();
+                            for (int i = 0; i < valParas.size(); ++i) {
+                                if (i > 0) {
+                                    valPara = String.valueOf(valPara) + "|";
+                                }
+                                valPara = String.valueOf(valPara) + (String)valParas.get(i);
+                            }
+                            valPara = String.valueOf(valPara) + ";;;";
+                        }
+                        if ("floatValue".equals(type)) {
+                            valParas = (List)object.getValueParameter();
+                            valPara = String.valueOf(valPara) + ";";
+                            valPara = String.valueOf(valPara) + valParas.get(0);
+                            valPara = String.valueOf(valPara) + ";";
+                            valPara = String.valueOf(valPara) + valParas.get(1);
+                            valPara = String.valueOf(valPara) + ";";
+                            if (valParas.size() == 3) {
+                                valPara = String.valueOf(valPara) + valParas.get(2);
+                            }
+                        }
+                    } else {
+                        valPara = String.valueOf(valPara) + ";;;";
+                    }
+                } else {
+                    val = "";
+                    valPara = ";";
+                }
+                this.logger.debug("{};{};{};{};{};{};{};{}", new Object[]{object.getReadable(), object.getWriteable(), object.getRecordable(), object.getVirtual(), type, object.getFullServiceName(), val, valPara});
+                this.printAllServices(object.serviceTreeMap);
+            }
+        }
+    }
+
+    public void resetAllUpdates(Map<String, KM200ServiceObject> actTreeMap) {
+        if (actTreeMap != null) {
+            for (KM200ServiceObject stmObject : actTreeMap.values()) {
+                if (stmObject == null) continue;
+                stmObject.setUpdated(false);
+                this.resetAllUpdates(stmObject.serviceTreeMap);
+            }
+        }
+    }
+
+    public Boolean containsService(String service) {
+        String[] servicePath = service.split("/");
+        KM200ServiceObject object = null;
+        int len = servicePath.length;
+        if (len == 0) {
+            return false;
+        }
+        if (!this.serviceTreeMap.containsKey(servicePath[1])) {
+            return false;
+        }
+        if (len == 2) {
+            return true;
+        }
+        object = this.serviceTreeMap.get(servicePath[1]);
+        for (int i = 2; i < len; ++i) {
+            if (!object.serviceTreeMap.containsKey(servicePath[i])) {
+                return false;
+            }
+            object = object.serviceTreeMap.get(servicePath[i]);
+        }
+        return true;
+    }
+
+    public KM200ServiceObject getServiceObject(String service) {
+        String[] servicePath = service.split("/");
+        KM200ServiceObject object = null;
+        int len = servicePath.length;
+        if (len == 0) {
+            return null;
+        }
+        if (!this.serviceTreeMap.containsKey(servicePath[1])) {
+            return null;
+        }
+        object = this.serviceTreeMap.get(servicePath[1]);
+        if (len == 2) {
+            return object;
+        }
+        for (int i = 2; i < len; ++i) {
+            if (!object.serviceTreeMap.containsKey(servicePath[i])) {
+                return null;
+            }
+            object = object.serviceTreeMap.get(servicePath[i]);
+        }
+        return object;
+    }
+
+    /*
+     * Enabled aggressive block sorting
+     * Enabled unnecessary exception pruning
+     * Enabled aggressive exception aggregation
+     */
+    public JsonObject getServiceNode(String service) {
+        String decodedData = null;
+        JsonObject nodeRoot = null;
+        byte[] recData = this.deviceCommunicator.getDataFromService(service.toString());
+        try {
+            if (recData == null) {
+                this.logger.debug("Communication to {} is not possible!", (Object)service);
+                return null;
+            }
+            if (recData.length == 0) {
+                this.logger.debug("No reply from KM200!");
+                return null;
+            }
+            if (recData.length == 1) {
+                this.logger.debug("{}: recData.length == 1", (Object)service);
+                nodeRoot = new JsonObject();
+                decodedData = new String();
+                return nodeRoot;
+            }
+            decodedData = this.comCryption.decodeMessage(recData);
+            if (decodedData == null) {
+                this.logger.error("Decoding of the KM200 message is not possible!");
+                return null;
+            }
+            if (decodedData.length() <= 0) {
+                this.logger.warn("Get empty reply");
+                return null;
+            }
+            if (!"SERVICE NOT AVAILABLE".equals(decodedData)) return (JsonObject)this.jsonParser.parse(decodedData);
+            this.logger.debug("{}: SERVICE NOT AVAILABLE", (Object)service);
+            return null;
+        }
+        catch (JsonParseException e) {
+            this.logger.error("Parsingexception in JSON: {} service: {}", (Object)e.getMessage(), (Object)service);
+            return null;
+        }
+    }
+
+    public void setServiceNode(String service, JsonObject newObject) {
+        this.logger.debug("Encoding: {}", (Object)newObject);
+        byte[] encData = this.comCryption.encodeMessage(newObject.toString());
+        if (encData == null) {
+            this.logger.error("Couldn't encrypt data");
+            return;
+        }
+        this.logger.debug("Send: {}", (Object)service);
+        int retVal = this.deviceCommunicator.sendDataToService(service, encData);
+        if (retVal == 0) {
+            this.logger.debug("Send to device failed: {}: {}", (Object)service, (Object)newObject);
+        }
     }
 }
 
