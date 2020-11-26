@@ -1,0 +1,6 @@
+FROM balenalib/raspberrypi3-openjdk:8-jdk
+MAINTAINER knaus thomas
+COPY target/netatmo-0.0.1-SNAPSHOT.jar /opt/spring-cloud/lib/
+ENTRYPOINT ["/usr/bin/java"]
+CMD ["-jar", "/opt/spring-cloud/lib/netatmo-0.0.1-SNAPSHOT.jar"]
+EXPOSE 8080
