@@ -1,6 +1,5 @@
 package com.buderus.database;
 
-import com.buderus.connection.config.KM200Topic;
 import org.dizitart.no2.Cursor;
 import org.dizitart.no2.Document;
 import org.dizitart.no2.Nitrite;

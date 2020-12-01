@@ -1,7 +1,7 @@
 package com.buderus.connection.call;
 
+import com.buderus.connection.call.subscribe.*;
 import com.buderus.connection.config.KM200Converter;
-import com.buderus.connection.config.KM200Topic;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class MQTTClient {
     String mosquittoPort;
 
     private MqttClient client;
+    List<KM200SubscribeValues> topics;
 
     @PostConstruct
     private void initializeMQTTClient() {
@@ -50,7 +52,7 @@ public class MQTTClient {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     System.out.println(topic + ": " + Arrays.toString(message.getPayload()));
-                    km200Converter.checkPayload(message, KM200Topic.descriptionOf(topic));
+                    km200Converter.checkPayload(message, getValue(topic));
                 }
 
                 @Override
@@ -65,14 +67,27 @@ public class MQTTClient {
     }
 
     private void subscribeAllTopics() {
-        List<KM200Topic> topics = Arrays.asList(KM200Topic.values());
-        for (KM200Topic topic : topics) {
+        this.topics = new ArrayList<>();
+        topics.addAll(Arrays.asList(SystemValues.values()));
+        topics.addAll(Arrays.asList(HeatCircuit1.values()));
+        topics.addAll(Arrays.asList(HeatCircuit2.values()));
+        topics.addAll(Arrays.asList(HeatSources.values()));
+        topics.addAll(Arrays.asList(HolidayMode.values()));
+        for (KM200SubscribeValues topic : topics) {
             try {
                 client.subscribe(topic.getDescription());
             } catch (MqttException e) {
                 logger.error("{}", e.getMessage(), e);
             }
         }
+    }
+
+    private KM200SubscribeValues getValue(String topic) {
+        KM200SubscribeValues value = null;
+        if (!topics.isEmpty()) {
+            value = topics.stream().filter(p -> p.getDescription().equals(topic)).findFirst().get();
+        }
+        return value;
     }
 
     public MqttClient getClient() {

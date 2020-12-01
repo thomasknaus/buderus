@@ -1,14 +1,6 @@
 
 ;
 Buderus.iml,4\8\4847fc52f6a9a9e34d41b7e7781a8fe97b57d85c
-t
-Dsrc/main/java/com/buderus/connection/call/BuderusConnectionCall.java,4\5\4591931c41e06cdaac61e7091c33c0e8cdaddde9
-p
-@src/main/java/com/buderus/connection/config/KM200CommObject.java,3\c\3c7f6604ec90fc43807d19e8a54ee118a3e0e9cb
-l
-<src/main/java/com/buderus/connection/config/KM200Device.java,0\e\0e4c1f7cfd7535733478a9b1c0a212448d68b97a
-p
-@src/main/java/com/buderus/controller/HealthStatusController.java,5\5\55d6930ad22ce2fa79424a7fb5f47a55a72b34ce
 \
 ,src/main/java/com/buderus/SwaggerConfig.java,4\5\45c08ae9ee0dc351bc5d612788434325fe3f3641
 7

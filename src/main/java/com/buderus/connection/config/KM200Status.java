@@ -7,29 +7,29 @@ import java.io.Serializable;
 public class KM200Status implements Serializable {
 
     @JsonProperty("ts")
-    private Integer ts;
+    private String ts;
     @JsonProperty("val")
-    private Double val;
+    private String val;
     @JsonProperty("km200_unitOfMeasure")
     private String km200UnitOfMeasure;
 
     @JsonProperty("ts")
-    public Integer getTs() {
+    public String getTs() {
         return ts;
     }
 
     @JsonProperty("ts")
-    public void setTs(Integer ts) {
+    public void setTs(String ts) {
         this.ts = ts;
     }
 
     @JsonProperty("val")
-    public Double getVal() {
+    public String getVal() {
         return val;
     }
 
     @JsonProperty("val")
-    public void setVal(Double val) {
+    public void setVal(String val) {
         this.val = val;
     }
 

@@ -1,9 +1,11 @@
 package com.buderus.controller;
 
+import com.buderus.connection.call.subscribe.HeatCircuit1;
+import com.buderus.connection.call.subscribe.WaterCircuit1;
 import com.buderus.connection.config.KM200ConnectType;
 import com.buderus.connection.config.KM200Converter;
 import com.buderus.connection.config.KM200Status;
-import com.buderus.connection.config.KM200Topic;
+import com.buderus.connection.call.subscribe.SystemValues;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -35,17 +37,6 @@ public class KM200Controller {
         return new ResponseEntity<KM200ConnectType>(type, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Buderus chimney", response = Iterable.class, tags = "buderus")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK", response = KM200Status.class),
-            @ApiResponse(code = 204, message = "no content")
-    })
-    @RequestMapping(value = "/chimney", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<KM200Status> getChimney() {
-        KM200Status km200Status = km200Converter.getStatusByTopic(KM200Topic.CHIMNEY);
-        return new ResponseEntity<KM200Status>(km200Status, HttpStatus.OK);
-    }
-
     @ApiOperation(value = "Buderus outdoor temperature", response = Iterable.class, tags = "buderus")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success|OK", response = KM200Status.class),
@@ -53,7 +44,7 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/outtmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Status> getOutdoorTemperature() {
-        KM200Status KM200Status = km200Converter.getStatusByTopic(KM200Topic.TMPOUTDOOR);
+        KM200Status KM200Status = km200Converter.getStatusByTopic(SystemValues.SYSTMPOUTT1);
         return new ResponseEntity<KM200Status>(KM200Status, HttpStatus.OK);
     }
 
@@ -64,7 +55,7 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/actualttmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Status> getActualTemperature() {
-        KM200Status km200Status = km200Converter.getStatusByTopic(KM200Topic.ACTUALTMP);
+        KM200Status km200Status = km200Converter.getStatusByTopic(WaterCircuit1.DHW1CIRACTTMP);
         return new ResponseEntity<KM200Status>(km200Status, HttpStatus.OK);
     }
 
@@ -75,18 +66,7 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/worktime", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Status> getWorkTime() {
-        KM200Status km200Status = km200Converter.getStatusByTopic(KM200Topic.WORKTIME);
-        return new ResponseEntity<KM200Status>(km200Status, HttpStatus.OK);
-    }
-
-    @ApiOperation(value = "Buderus actual supply temperature", response = Iterable.class, tags = "buderus")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK", response = KM200Status.class),
-            @ApiResponse(code = 204, message = "no content")
-    })
-    @RequestMapping(value = "/actsupplytmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<KM200Status> getActualSupplyTemperature() {
-        KM200Status km200Status = km200Converter.getStatusByTopic(KM200Topic.ACTSUPPLYTMP);
+        KM200Status km200Status = km200Converter.getStatusByTopic(SystemValues.SYSAPPWORKTIMETOTSYS);
         return new ResponseEntity<KM200Status>(km200Status, HttpStatus.OK);
     }
 
@@ -97,7 +77,7 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/roomtmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Status> getRoomTemperature() {
-        KM200Status km200Status = km200Converter.getStatusByTopic(KM200Topic.ROOMTMP);
+        KM200Status km200Status = km200Converter.getStatusByTopic(HeatCircuit1.HEATHC1ROOMTMP);
         return new ResponseEntity<KM200Status>(km200Status, HttpStatus.OK);
     }
 
@@ -108,7 +88,7 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/supplysetpoint", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Status> getSupplySetpoint() {
-        KM200Status km200Status = km200Converter.getStatusByTopic(KM200Topic.SUPPLYSETPOINT);
+        KM200Status km200Status = km200Converter.getStatusByTopic(SystemValues.SYSTMPSUPT1SET);
         return new ResponseEntity<KM200Status>(km200Status, HttpStatus.OK);
     }
 }

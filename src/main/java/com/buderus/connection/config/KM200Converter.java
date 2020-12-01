@@ -1,5 +1,7 @@
 package com.buderus.connection.config;
 
+import com.buderus.connection.call.subscribe.KM200SubscribeValues;
+import com.buderus.connection.call.subscribe.SystemValues;
 import com.buderus.database.BuderusDatabase;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,32 +23,36 @@ public class KM200Converter {
     @Autowired
     BuderusDatabase buderusDatabase;
 
-    public void checkPayload(MqttMessage message, KM200Topic topic) throws IOException, ClassNotFoundException {
+    public void checkPayload(MqttMessage message, KM200SubscribeValues topic) throws IOException, ClassNotFoundException {
         if(topic == null || message == null){
             return;
         }
         String value = message.toString();
-        if (topic.equals(KM200Topic.CONNECTED)) {
+        if (checkDescription(topic, SystemValues.CONNECTED)) {
             setConnectionStatus(topic, KM200ConnectType.contains(value));
         } else {
             try {
                 final ObjectMapper mapper = new ObjectMapper();
-                setKM200Value(topic, mapper.readValue(value, KM200Status.class));
+                saveIncomingMessages(topic, mapper.readValue(value, KM200Status.class));
             } catch (JsonProcessingException e) {
                 logger.error("{}", e.getMessage(), e);
             }
         }
     }
 
-    private void setKM200Value(KM200Topic topic, KM200Status status){
+    private boolean checkDescription(KM200SubscribeValues incoming, KM200SubscribeValues reference){
+        return incoming.getDescription().equals(reference.getDescription());
+    }
+
+    private void saveIncomingMessages(KM200SubscribeValues topic, KM200Status status){
         buderusDatabase.insertDocument(topic.getDescription(), topic.toString(), status);
     }
 
-    private void setConnectionStatus(KM200Topic topic, KM200ConnectType connectionStatus){
+    private void setConnectionStatus(KM200SubscribeValues topic, KM200ConnectType connectionStatus){
         buderusDatabase.insertDocument(topic.getDescription(), topic.toString(), connectionStatus.name());
     }
 
-    public KM200Status getStatusByTopic(KM200Topic topic){
+    public KM200Status getStatusByTopic(KM200SubscribeValues topic){
         Object result = buderusDatabase.find(topic.getDescription(), topic.toString());
         if (result != null) {
             if (result instanceof KM200Status) {
@@ -57,7 +63,7 @@ public class KM200Converter {
     }
 
     public KM200ConnectType getConnectStatus() {
-        Object result = buderusDatabase.find(KM200Topic.CONNECTED.getDescription(), KM200Topic.CONNECTED.toString());
+        Object result = buderusDatabase.find(SystemValues.CONNECTED.getDescription(), SystemValues.CONNECTED.toString());
         if (result != null) {
             return KM200ConnectType.valueOf(String.valueOf(result));
         }
