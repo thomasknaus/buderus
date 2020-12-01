@@ -49,6 +49,9 @@ public enum SystemValues implements KM200SubscribeValues{
             return "km200/status/system/sensors/temperatures/chimney";
         }
     },
+    /**
+     * Heißwassertemperatur T1 {@link SystemValues#SYSTMPHOTWATT1}.
+     */
     SYSTMPHOTWATT1 {
         @Override
         public String toString() { return "SYSTMPHOTWATT1"; }
@@ -57,6 +60,9 @@ public enum SystemValues implements KM200SubscribeValues{
             return "km200/status/system/sensors/temperatures/hotWater_t1";
         }
     },
+    /**
+     * Heißwassertemperatur T2 {@link SystemValues#SYSTMPHOTWATT2}.
+     */
     SYSTMPHOTWATT2 {
         @Override
         public String toString() { return "SYSTMPHOTWATT2"; }
@@ -65,6 +71,9 @@ public enum SystemValues implements KM200SubscribeValues{
             return "km200/status/system/sensors/temperatures/hotWater_t2";
         }
     },
+    /**
+     * Außentemperatur {@link SystemValues#SYSTMPOUTT1}.
+     */
     SYSTMPOUTT1 {
         @Override
         public String toString() { return "SYSTMPOUTT1"; }
@@ -73,6 +82,9 @@ public enum SystemValues implements KM200SubscribeValues{
             return "km200/status/system/sensors/temperatures/outdoor_t1";
         }
     },
+    /**
+     * Rücklauftemperatur {@link SystemValues#SYSTMPRET}.
+     */
     SYSTMPRET {
         @Override
         public String toString() { return "SYSTMPRET"; }
@@ -81,6 +93,9 @@ public enum SystemValues implements KM200SubscribeValues{
             return "km200/status/system/sensors/temperatures/return";
         }
     },
+    /**
+     * Vorlauftemperatur {@link SystemValues#SYSTMPSUPT1}.
+     */
     SYSTMPSUPT1 {
         @Override
         public String toString() { return "SYSTMPSUPT1"; }
@@ -129,6 +144,9 @@ public enum SystemValues implements KM200SubscribeValues{
         @Override
         public String getDescription() { return "km200/status/system/appliance/CHpumpModulation"; }
     },
+    /**
+     * Brenner Status Flame an {@link SystemValues#SYSAPPFLAMECUR}.
+     */
     SYSAPPFLAMECUR {
         @Override
         public String toString() { return "SYSAPPFLAMECUR"; }

@@ -53,7 +53,7 @@ public class KM200Controller {
             @ApiResponse(code = 200, message = "Success|OK", response = KM200Status.class),
             @ApiResponse(code = 204, message = "no content")
     })
-    @RequestMapping(value = "/actualttmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/actualdhwttmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Status> getActualTemperature() {
         KM200Status km200Status = km200Converter.getStatusByTopic(WaterCircuit1.DHW1CIRACTTMP);
         return new ResponseEntity<KM200Status>(km200Status, HttpStatus.OK);

@@ -11,4 +11,4 @@ docker build --file=Dockerfile_Mqtt_KM200.server --tag=buderus2mqtt:latest --rm=
 
 docker exec -it <container_id_or_name> sh
 
-./scan.js -p f6671c4f6a0a68f9876f202a154d7010f1f4ed4e08dd66c17ccca4803c2301d5 -k 192.168.178.63 gb135.txt
+scanner.js -p f6671c4f6a0a68f9876f202a154d7010f1f4ed4e08dd66c17ccca4803c2301d5 -k 192.168.178.63 gb135.txt

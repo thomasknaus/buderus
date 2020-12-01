@@ -65,6 +65,18 @@ public enum PublishTopics implements KM200SubscribeValues {
             return "/km200/status/heatingCircuits/hc1/suWiSwitchMode";
         }
     },
+    HEATCIRCUITHC1TMPROOMSET {
+        // String value HCMode.class
+        @Override
+        public String toString() {
+            return "HEATCIRCUITHC1TMPROOMSET";
+        }
+
+        @Override
+        public String getDescription() {
+            return "/km200/status/heatingCircuits/hc1/temperatureRoomSetpoint";
+        }
+    },
     HEATCIRCUITHC2OPERATIONMODE {
         // String Value OperationModeHC
         @Override
@@ -111,6 +123,18 @@ public enum PublishTopics implements KM200SubscribeValues {
         @Override
         public String getDescription() {
             return "/km200/status/heatingCircuits/hc2/suWiThreshold";
+        }
+    },
+    HEATCIRCUITHC2TMPROOMSET {
+        // String value HCMode.class
+        @Override
+        public String toString() {
+            return "HEATCIRCUITHC2TMPROOMSET";
+        }
+
+        @Override
+        public String getDescription() {
+            return "/km200/status/heatingCircuits/hc2/temperatureRoomSetpoint";
         }
     },
     HEATCIRCUITHC2SUWISWITCHMODE {
@@ -377,6 +401,10 @@ public enum PublishTopics implements KM200SubscribeValues {
             return "/km200/status/system/holidayModes/hm5/hcMode";
         }
     };
+
+
+
+
 
     public PublishTopics descriptionOf(String description) {
         for (PublishTopics topic : PublishTopics.values()) {
