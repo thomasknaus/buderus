@@ -1,10 +1,9 @@
 2020-11-27 20:43:52.306 <info>  Writable: /heatingCircuits/hc1/operationMode (stringValue): ["auto","manual"]
-2020-11-27 20:43:52.664 <info>  Writable: /heatingCircuits/hc1/temporaryRoomSetpoint (floatValue): 5 - 30
 2020-11-27 20:43:52.915 <info>  Writable: /heatingCircuits/hc1/activeSwitchProgram (stringValue): ["A","B"]
 2020-11-27 20:43:53.596 <info>  Writable: /heatingCircuits/hc1/suWiThreshold (floatValue): 10 - 30
 2020-11-27 20:43:54.267 <info>  Writable: /heatingCircuits/hc1/suWiSwitchMode (stringValue): ["off","automatic","forced"]
 2020-11-27 20:43:54.858 <info>  Writable: /heatingCircuits/hc2/operationMode (stringValue): ["auto","manual"]
-2020-11-27 20:43:55.200 <info>  Writable: /heatingCircuits/hc2/temporaryRoomSetpoint (floatValue): 5 - 30
+
 2020-11-27 20:43:55.443 <info>  Writable: /heatingCircuits/hc2/activeSwitchProgram (stringValue): ["A","B"]
 2020-11-27 20:43:56.140 <info>  Writable: /heatingCircuits/hc2/suWiThreshold (floatValue): 10 - 30
 2020-11-27 20:43:56.812 <info>  Writable: /heatingCircuits/hc2/suWiSwitchMode (stringValue): ["off","automatic","forced"]
@@ -30,3 +29,5 @@
 2020-11-27 20:44:13.165 <info>  Writable: /system/holidayModes/hm5/dhwMode (stringValue): ["AUTO_SAT","OFF","TD_OFF"]
 2020-11-27 20:44:13.284 <info>  Writable: /system/holidayModes/hm5/hcMode (stringValue): ["AUTO_SAT","FIX_TEMP","OFF","ECO"]
 
+2020-11-27 20:43:52.664 <info>  Writable: /heatingCircuits/hc1/temporaryRoomSetpoint (floatValue): 5 - 30  --> intelligente Raumsteuerung AQt
+2020-11-27 20:43:55.200 <info>  Writable: /heatingCircuits/hc2/temporaryRoomSetpoint (floatValue): 5 - 30 --> intelligente Raumsteuerung AQt

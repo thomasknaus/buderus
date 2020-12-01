@@ -1,0 +1,14 @@
+km200/status/system/sensors/temperatures/supply_t1: Solltemperatur Vorlauf --> Heizungsmischer T Eingang
+km200/status/system/appliance/actualSupplyTemperature: Aktuelle Vorlauftemperatur --> Heizungsmischer AI Eingang
+km200/status/system/sensors/temperatures/outdoor_t1: Aktuell Außentemperatur --> Intelligente Raumsteuerung AI Eingang
+
+/heatingCircuits/hc1/temporaryRoomSetpoint (floatValue): 5 - 30  --> intelligente Raumsteuerung AQt Ausgang
+/heatingCircuits/hc2/temporaryRoomSetpoint (floatValue): 5 - 30 --> intelligente Raumsteuerung AQt Ausgang
+/heatingCircuits/hc1/suWiSwitchMode: FORCED --> Heizungsmischer Q1 Ausgang
+/heatingCircuits/hc2/suWiSwitchMode: FORCED --> Heizungsmischer Q1 Ausgang
+
+/heatingCircuits/hc1/suWiSwitchMode: OFF --> Heizungsmischer Q2 Ausgang
+/heatingCircuits/hc2/suWiSwitchMode: OFF --> Heizungsmischer Q2 Ausgang
+
+/heatingCircuits/hc1/temporaryRoomSetpoint (floatValue): 0 = OFF  --> intelligente Raumsteuerung AQt Ausgang
+/heatingCircuits/hc2/temporaryRoomSetpoint (floatValue): 0 = OFF --> intelligente Raumsteuerung AQt Ausgang
