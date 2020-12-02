@@ -26,7 +26,7 @@ public enum PublishTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc1/temporaryRoomSetpoint";
+            return /*"/km200/status*/"/heatingCircuits/hc1/temporaryRoomSetpoint";
         }
     },
     HEATCIRCUITHC1ACTSWITCHPROG {

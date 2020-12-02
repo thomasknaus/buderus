@@ -12,6 +12,7 @@ public class KM200Status implements Serializable {
     private String val;
     @JsonProperty("km200_unitOfMeasure")
     private String km200UnitOfMeasure;
+    private Integer qos;
 
     @JsonProperty("ts")
     public String getTs() {
@@ -42,4 +43,8 @@ public class KM200Status implements Serializable {
     public void setKm200UnitOfMeasure(String km200UnitOfMeasure) {
         this.km200UnitOfMeasure = km200UnitOfMeasure;
     }
+
+    public Integer getQos() { return qos; }
+
+    public void setQos(Integer qos) { this.qos = qos; }
 }

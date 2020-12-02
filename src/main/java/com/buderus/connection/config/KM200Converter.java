@@ -32,7 +32,9 @@ public class KM200Converter {
         } else {
             try {
                 final ObjectMapper mapper = new ObjectMapper();
-                saveIncomingMessages(topic, mapper.readValue(value, KM200Status.class));
+                KM200Status status = mapper.readValue(value, KM200Status.class);
+                status.setQos(message.getQos());
+                saveIncomingMessages(topic, status);
             } catch (JsonProcessingException e) {
                 logger.error("{}", e.getMessage(), e);
             }
@@ -80,6 +82,7 @@ public class KM200Converter {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(status);
         MqttMessage message = new MqttMessage(jsonString.getBytes(StandardCharsets.UTF_8));
+        message.setQos(status.getQos());
         return message;
     }
 }

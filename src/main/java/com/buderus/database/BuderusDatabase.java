@@ -15,7 +15,7 @@ public class BuderusDatabase {
 
     Nitrite database = null;
 
-    @PostConstruct
+    //@PostConstruct
     public void initDB() {
         if (this.database == null) {
             setDatabase(Nitrite.builder().compressed().filePath("/tmp/buderus.db").openOrCreate());

@@ -68,3 +68,5 @@ SuSwitchMode
     "allowedValues" : [ "off", "automatic", "forced" ]
   }
 }
+
+{"ts":1606941731,"val":"auto"}

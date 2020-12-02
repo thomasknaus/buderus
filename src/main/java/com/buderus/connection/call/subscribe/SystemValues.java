@@ -79,7 +79,7 @@ public enum SystemValues implements KM200SubscribeValues{
         public String toString() { return "SYSTMPOUTT1"; }
         @Override
         public String getDescription() {
-            return "km200/status/system/sensors/temperatures/outdoor_t1";
+            return /*"km200/status*/"/system/sensors/temperatures/outdoor_t1";
         }
     },
     /**
@@ -100,13 +100,13 @@ public enum SystemValues implements KM200SubscribeValues{
         @Override
         public String toString() { return "SYSTMPSUPT1"; }
         @Override
-        public String getDescription() { return "km200/status/system/sensors/temperatures/supply_t1"; }
+        public String getDescription() { return /*"km200/status*/"/system/sensors/temperatures/supply_t1"; }
     },
     SYSTMPSUPT1SET {
         @Override
         public String toString() { return "SYSTMPSUPT1SET"; }
         @Override
-        public String getDescription() { return "km200/status/system/sensors/temperatures/supply_t1_setpoint"; }
+        public String getDescription() { return /*"km200/status*/"/system/sensors/temperatures/supply_t1_setpoint"; }
     },
     SYSTMPSWITCH {
         @Override
@@ -130,7 +130,7 @@ public enum SystemValues implements KM200SubscribeValues{
         @Override
         public String toString() { return "SYSAPPACTSUPTMP"; }
         @Override
-        public String getDescription() { return "km200/status/system/appliance/actualSupplyTemperature"; }
+        public String getDescription() { return /*"km200/status*/"/system/appliance/actualSupplyTemperature"; }
     },
     SYSAPPCHIMNEYSWEEP {
         @Override

@@ -36,7 +36,7 @@ public class MQTTClient {
 
     private Boolean retained;
 
-    @PostConstruct
+    //@PostConstruct
     private void initializeMQTTClient() {
         try {
             client = new MqttClient(
@@ -102,6 +102,7 @@ public class MQTTClient {
 
     public void publishTopic(KM200SubscribeValues values, KM200Status km200Status){
         try {
+
             client.publish(values.getDescription(), km200Converter.convertToPayload(km200Status));
         } catch (MqttException | JsonProcessingException e) {
             logger.error("{}", e.getMessage(), e);

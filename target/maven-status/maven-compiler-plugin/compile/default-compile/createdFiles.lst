@@ -6,6 +6,7 @@ com/buderus/connection/call/subscribe/SystemValues$3.class
 com/buderus/connection/call/subscribe/HeatSources$22.class
 com/buderus/connection/call/subscribe/HeatSources$28.class
 com/buderus/connection/call/subscribe/HeatSources$42.class
+com/buderus/connection/call/KM200RestCall.class
 com/buderus/connection/call/subscribe/HeatCircuit1$12.class
 com/buderus/connection/call/subscribe/WaterCircuit1$10.class
 com/buderus/connection/call/publish/KM200PublishTopic$1.class
@@ -63,6 +64,8 @@ com/buderus/connection/call/subscribe/SystemValues$4.class
 com/buderus/connection/call/subscribe/HolidayMode$6.class
 com/buderus/connection/call/subscribe/SystemValues$25.class
 com/buderus/connection/call/subscribe/HolidayMode$13.class
+com/buderus/connection/config/KM200Result.class
+com/buderus/connection/config/KM200Device.class
 com/buderus/connection/call/subscribe/HeatCircuit1$13.class
 com/buderus/connection/call/publish/PublishTopics$3.class
 com/buderus/connection/call/publish/KM200PublishTopic$18.class
@@ -208,6 +211,7 @@ com/buderus/SwaggerConfig.class
 com/buderus/connection/call/subscribe/HolidayMode$15.class
 com/buderus/connection/call/publish/OperationModeDHW.class
 com/buderus/connection/call/publish/KM200PublishTopic$3.class
+com/buderus/connection/config/State.class
 com/buderus/connection/call/subscribe/HeatSources$41.class
 com/buderus/connection/call/subscribe/WaterCircuit1$1.class
 com/buderus/connection/call/subscribe/HeatSources$36.class
