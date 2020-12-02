@@ -2,6 +2,8 @@ package com.buderus.connection.call;
 
 import com.buderus.connection.call.subscribe.*;
 import com.buderus.connection.config.KM200Converter;
+import com.buderus.connection.config.KM200Status;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
@@ -32,6 +34,8 @@ public class MQTTClient {
     private MqttClient client;
     List<KM200SubscribeValues> topics;
 
+    private Boolean retained;
+
     @PostConstruct
     private void initializeMQTTClient() {
         try {
@@ -56,7 +60,13 @@ public class MQTTClient {
 
                 @Override
                 public void deliveryComplete(IMqttDeliveryToken token) {
-                    //Called when a outgoing publish is complete
+                    try {
+                        // add something clever here
+                        logger.info("{}", token.getMessage().toString());
+                    } catch (MqttException e) {
+                        logger.error("{}", e.getMessage(), e);
+                    }
+
                 }
             });
             client.connect();
@@ -90,11 +100,27 @@ public class MQTTClient {
         return value;
     }
 
+    public void publishTopic(KM200SubscribeValues values, KM200Status km200Status){
+        try {
+            client.publish(values.getDescription(), km200Converter.convertToPayload(km200Status));
+        } catch (MqttException | JsonProcessingException e) {
+            logger.error("{}", e.getMessage(), e);
+        }
+    }
+
     public MqttClient getClient() {
         return client;
     }
 
     public void setClient(MqttClient client) {
         this.client = client;
+    }
+
+    public Boolean getRetained() {
+        return retained;
+    }
+
+    public void setRetained(Boolean retained) {
+        this.retained = retained;
     }
 }

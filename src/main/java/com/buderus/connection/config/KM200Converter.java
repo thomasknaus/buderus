@@ -11,9 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class KM200Converter {
@@ -75,5 +74,12 @@ public class KM200Converter {
         ByteArrayInputStream b = new ByteArrayInputStream(bytes);
         ObjectInputStream in = new ObjectInputStream(b);
         return in.readObject();
+    }
+
+    public MqttMessage convertToPayload(KM200Status status) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = mapper.writeValueAsString(status);
+        MqttMessage message = new MqttMessage(jsonString.getBytes(StandardCharsets.UTF_8));
+        return message;
     }
 }

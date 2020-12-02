@@ -25,4 +25,4 @@ COPY package.json .
 COPY config.js .
 COPY km200mqtt.js .
 VOLUME ["/data"]
-CMD ./km200mqtt.js 
+CMD ./km200mqtt.js -u mqtt://192.168.178.34 -k 192.168.178.63 -p f6671c4f6a0a68f9876f202a154d7010f1f4ed4e08dd66c17ccca4803c2301d5
