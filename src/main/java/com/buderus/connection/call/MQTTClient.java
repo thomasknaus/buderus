@@ -51,12 +51,12 @@ public class MQTTClient {
 
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    System.out.println(topic + ": " + Arrays.toString(message.getPayload()));
                     km200Converter.checkPayload(message, getValue(topic));
                 }
 
                 @Override
-                public void deliveryComplete(IMqttDeliveryToken token) {//Called when a outgoing publish is complete
+                public void deliveryComplete(IMqttDeliveryToken token) {
+                    //Called when a outgoing publish is complete
                 }
             });
             client.connect();

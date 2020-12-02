@@ -31,3 +31,40 @@
 
 2020-11-27 20:43:52.664 <info>  Writable: /heatingCircuits/hc1/temporaryRoomSetpoint (floatValue): 5 - 30  --> intelligente Raumsteuerung AQt
 2020-11-27 20:43:55.200 <info>  Writable: /heatingCircuits/hc2/temporaryRoomSetpoint (floatValue): 5 - 30 --> intelligente Raumsteuerung AQt
+
+OperationMode
+{
+  "native" : {
+    "type" : "stringValue",
+    "writeable" : 1,
+    "recordable" : 0,
+    "allowedValues" : [ "auto", "manual" ]
+  }
+}
+
+temporaryRoomSetpoint
+{
+  "native" : {
+    "type" : "floatValue",
+    "writeable" : 1,
+    "recordable" : 0,
+    "unitOfMeasure" : "C",
+    "minValue" : 5,
+    "maxValue" : 30,
+    "state" : [ {
+      "off" : 0
+    }, {
+      "na" : -1
+    } ]
+  }
+}
+
+SuSwitchMode
+{
+  "native" : {
+    "type" : "stringValue",
+    "writeable" : 1,
+    "recordable" : 0,
+    "allowedValues" : [ "off", "automatic", "forced" ]
+  }
+}

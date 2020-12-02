@@ -213,6 +213,7 @@ com/buderus/connection/call/subscribe/WaterCircuit1$1.class
 com/buderus/connection/call/subscribe/HeatSources$36.class
 com/buderus/connection/call/subscribe/SystemValues$2.class
 com/buderus/connection/call/subscribe/HolidayMode$9.class
+com/buderus/connection/call/publish/PublishTopics$32.class
 com/buderus/connection/call/subscribe/SystemValues$23.class
 com/buderus/connection/call/subscribe/HeatCircuit2$13.class
 com/buderus/connection/call/subscribe/HeatSources$10.class
@@ -231,6 +232,7 @@ com/buderus/connection/call/publish/PublishTopics$8.class
 com/buderus/connection/call/subscribe/SystemValues$39.class
 com/buderus/connection/call/publish/PublishTopics$9.class
 com/buderus/connection/call/subscribe/SystemValues$22.class
+com/buderus/connection/call/publish/PublishTopics$33.class
 com/buderus/connection/call/subscribe/WaterCircuit1$3.class
 com/buderus/connection/call/subscribe/HeatSources$34.class
 com/buderus/connection/call/subscribe/Recordings$7.class

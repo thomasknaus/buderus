@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
+import static org.dizitart.no2.filters.Filters.eq;
+
 @Service
 public class BuderusDatabase {
 
@@ -35,21 +37,27 @@ public class BuderusDatabase {
     public Document createDocument(String key, Object value) {
         // create a document to populate data
         Document doc = new Document();
-        doc.put(key, value);
+        doc.put("topic", key);
+        doc.put("data", value);
         return doc;
     }
 
     public void insertDocument(final String collection, final String key, final Object value) {
         NitriteCollection nitriteCollection = createCollection(collection);
-        nitriteCollection.insert(createDocument(key, value));
+        Object result = find(collection, key);
+        if (result != null) {
+            nitriteCollection.update(eq("topic", key), createDocument(key, value));
+        } else {
+            nitriteCollection.insert(createDocument(key, value));
+        }
         getDatabase().commit();
     }
 
     public Object find(final String collection, final String key) {
         NitriteCollection databaseCollection = getDatabase().getCollection(collection);
-        Cursor cursor = databaseCollection.find();
+        Cursor cursor = databaseCollection.find(eq("topic", key));
         for (Document document : cursor) {
-            return document.get(key);
+            return document.get("data");
         }
         return null;
     }
