@@ -29,7 +29,10 @@ public class KM200Get extends KM200RestAbstract {
         HttpGet get = new HttpGet("http://" + deviceUrl + service);
 
         addHeader(get);
+        addRequestConfig(get);
         HttpResponse response = client.execute(get);
-        return convertResponseToString(response, md5Salt);
+        String result = convertResponseToString(response, md5Salt);
+        get.releaseConnection();
+        return result;
     }
 }

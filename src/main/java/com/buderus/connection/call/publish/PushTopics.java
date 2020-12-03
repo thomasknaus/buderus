@@ -47,7 +47,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc1/suWiThreshold";
+            return /*"/km200/status*/"/heatingCircuits/hc1/suWiThreshold";
         }
     },
     HEATCIRCUITHC1SUWISWITCHMODE {
@@ -59,7 +59,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc1/suWiSwitchMode";
+            return /*"/km200/status*/"/heatingCircuits/hc1/suWiSwitchMode";
         }
     },
     HEATCIRCUITHC1TMPROOMSET {
@@ -71,7 +71,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc1/temperatureRoomSetpoint";
+            return /*"/km200/status*/"/heatingCircuits/hc1/temperatureRoomSetpoint";
         }
     },
     HEATCIRCUITHC2OPERATIONMODE {

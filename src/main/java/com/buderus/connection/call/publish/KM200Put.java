@@ -26,13 +26,15 @@ public class KM200Put extends KM200RestAbstract {
     @Override
     public String doCall(String deviceUrl, String service, String jsonString, byte[] md5Salt) throws IOException {
         HttpClient client = HttpClientBuilder.create().build();
-        HttpPut put = new HttpPut("http://" + deviceUrl + service);
+        HttpPost put = new HttpPost("http://" + deviceUrl + service);
 
         addHeader(put);
-
+        //addRequestConfig(put);
         // Create some NameValuePair for HttpPost parameters
-        addEntityToRequest(put, jsonString);
+        addEntityToRequest(put, jsonString, md5Salt);
         HttpResponse response = client.execute(put);
-        return convertResponseToString(response, md5Salt);
+        String result = convertResponseToString(response, md5Salt);
+        put.releaseConnection();
+        return result;
     }
 }

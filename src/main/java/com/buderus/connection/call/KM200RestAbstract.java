@@ -12,6 +12,7 @@ import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -55,12 +56,19 @@ public abstract class KM200RestAbstract {
     protected void addHeader(HttpRequestBase restCall) {
         restCall.addHeader("Accept", "application/json");
         restCall.addHeader("User-Agent", "TeleHeater/2.2.3");
-        restCall.addHeader("Content-Type", "application/json");
+        restCall.addHeader("Content-Type", "ISO-8859-1");
     }
 
-    protected void addEntityToRequest(HttpPut put, String jsonString) {
-        HttpEntity stringEntity = new StringEntity(jsonString, ContentType.APPLICATION_JSON);
+    protected void addEntityToRequest(HttpPost put, String jsonString, byte[] md5Salt) {
+        final String contentType = "ISO-8859-1";
+        String encodedString = new String(encodeMessage(jsonString,contentType, md5Salt));
+        HttpEntity stringEntity = new StringEntity(encodedString, ContentType.APPLICATION_JSON);
         put.setEntity(stringEntity);
+    }
+
+    protected void addRequestConfig(HttpRequestBase restCall){
+        final RequestConfig params = RequestConfig.custom().setConnectTimeout(30*1000).setSocketTimeout(30*1000).build();
+        restCall.setConfig(params);
     }
 
     protected String convertResponseToString(HttpResponse response, byte[] md5Salt) {
@@ -171,9 +179,37 @@ public abstract class KM200RestAbstract {
         byte[] md5Salt = DatatypeConverter.parseHexBinary("f6671c4f6a0a68f9876f202a154d7010f1f4ed4e08dd66c17ccca4803c2301d5");
 
         JSONObject obj = new JSONObject();
-        obj.put("value", OperationModeHC.MANUAL.name().toLowerCase());
+        obj.put("value", Float.valueOf(10));
 
         byte[] encodeMessage = encodeMessage(obj.toJSONString(), charSet, md5Salt);
+        String jsonString = null;
+        byte[] entityMessage = null;
+        try {
+            jsonString = new String(encodeMessage, charSet);
+            HttpEntity stringEntity = new StringEntity(jsonString, ContentType.APPLICATION_JSON);
+            entityMessage = ByteStreams.toByteArray(stringEntity.getContent());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String entityResult = decodeMessage(entityMessage, charSet, md5Salt);
+        String result = decodeMessage(encodeMessage, charSet, md5Salt);
+        assertEquals(obj.toJSONString(), result);
+        assertEquals(obj.toJSONString(), entityResult);
+    }
+
+    public void checkIfRequestEntityCanConvertToNormalString(){
+        final String charSet = "ISO-8859-1";
+        byte[] md5Salt = DatatypeConverter.parseHexBinary("f6671c4f6a0a68f9876f202a154d7010f1f4ed4e08dd66c17ccca4803c2301d5");
+
+        JSONObject obj = new JSONObject();
+        obj.put("value", Float.valueOf(10));
+
+        byte[] encodeMessage = encodeMessage(obj.toJSONString(), charSet, md5Salt);
+        try {
+            String s = new String(encodeMessage, charSet);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String retString = null;
         try {
             retString = new String(encodeMessage, charSet);
