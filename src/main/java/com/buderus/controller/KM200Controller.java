@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,8 +145,11 @@ public class KM200Controller {
         HttpStatus status = HttpStatus.OK;
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("value", OperationModeHC.MANUAL.name().toLowerCase());
+
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put("value", OperationModeHC.MANUAL.name().toLowerCase());
         try {
-            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC1OPERATIONMODE.getDescription(), requestBody);
+            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC1OPERATIONMODE.getDescription(), jsonObj.toJSONString());
         } catch (IOException e) {
             logger.error("{}", e.getMessage(), e);
             status = HttpStatus.BAD_REQUEST;

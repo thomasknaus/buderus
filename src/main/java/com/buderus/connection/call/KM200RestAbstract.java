@@ -7,7 +7,9 @@ import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -15,6 +17,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONObject;
@@ -46,7 +50,7 @@ public abstract class KM200RestAbstract {
     private String charSet;
     private boolean connected = false;
 
-    protected abstract String doCall(String deviceUrl, String service, Map<String, Object> values, byte[] md5Salt) throws IOException;
+    protected abstract String doCall(String deviceUrl, String service, String jsonString, byte[] md5Salt) throws IOException;
 
     protected void addHeader(HttpRequestBase restCall) {
         restCall.addHeader("Accept", "application/json");
@@ -54,17 +58,9 @@ public abstract class KM200RestAbstract {
         restCall.addHeader("Content-Type", "application/json");
     }
 
-    protected void addEntityToRequest(HttpPut put, Map<String, Object> values) {
-        // Create some NameValuePair for HttpPost parameters
-        List<NameValuePair> arguments = new ArrayList<>(3);
-        for (String key : values.keySet()) {
-            arguments.add(new BasicNameValuePair(key, String.valueOf(values.get(key))));
-        }
-        try {
-            put.setEntity(new UrlEncodedFormEntity(arguments));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    protected void addEntityToRequest(HttpPut put, String jsonString) {
+        HttpEntity stringEntity = new StringEntity(jsonString, ContentType.APPLICATION_JSON);
+        put.setEntity(stringEntity);
     }
 
     protected String convertResponseToString(HttpResponse response, byte[] md5Salt) {
@@ -92,7 +88,7 @@ public abstract class KM200RestAbstract {
             connected = false;
         }
         String result = null;
-        if(responseBodyB64 != null){
+        if (responseBodyB64 != null) {
             result = decodeMessage(responseBodyB64, contentType, md5Salt);
         }
         return result;
@@ -138,17 +134,15 @@ public abstract class KM200RestAbstract {
     /**
      * This function removes zero padding from a byte array.
      */
-    private byte[] removeZeroPadding(byte[] bytes)
-    {
+    private byte[] removeZeroPadding(byte[] bytes) {
         int i = bytes.length - 1;
-        while (i >= 0 && bytes[i] == 0)
-        {
+        while (i >= 0 && bytes[i] == 0) {
             --i;
         }
         return Arrays.copyOf(bytes, i + 1);
     }
 
-    private byte[] encodeMessage(String message, String charSet, byte[] md5Salt){
+    private byte[] encodeMessage(String message, String charSet, byte[] md5Salt) {
         final Cipher cipher;
         try {
             byte[] byteFromString = message.getBytes(charSet);

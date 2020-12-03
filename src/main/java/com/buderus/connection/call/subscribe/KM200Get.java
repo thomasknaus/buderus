@@ -24,7 +24,7 @@ import java.util.Map;
 public class KM200Get extends KM200RestAbstract {
 
     @Override
-    public String doCall(String deviceUrl, String service, Map<String, Object> values, byte[] md5Salt) throws IOException {
+    public String doCall(String deviceUrl, String service, String jsonString, byte[] md5Salt) throws IOException {
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet get = new HttpGet("http://" + deviceUrl + service);
 

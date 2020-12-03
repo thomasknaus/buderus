@@ -2,6 +2,7 @@ package com.buderus.connection.call.publish;
 
 import com.buderus.connection.call.KM200RestAbstract;
 import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -23,14 +24,14 @@ import java.util.Map;
 public class KM200Put extends KM200RestAbstract {
 
     @Override
-    public String doCall(String deviceUrl, String service, Map<String, Object> values, byte[] md5Salt) throws IOException {
+    public String doCall(String deviceUrl, String service, String jsonString, byte[] md5Salt) throws IOException {
         HttpClient client = HttpClientBuilder.create().build();
         HttpPut put = new HttpPut("http://" + deviceUrl + service);
 
         addHeader(put);
 
         // Create some NameValuePair for HttpPost parameters
-        addEntityToRequest(put, values);
+        addEntityToRequest(put, jsonString);
         HttpResponse response = client.execute(put);
         return convertResponseToString(response, md5Salt);
     }

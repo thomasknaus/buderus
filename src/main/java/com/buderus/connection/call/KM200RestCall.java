@@ -48,8 +48,8 @@ public class KM200RestCall {
         return km200Measurements.doCall(deviceUrl, service, null, md5Salt);
     }
 
-    public String doPostRequest(String service, Map<String, Object> values) throws IOException {
-        return postInfo.doCall(deviceUrl, service, values, md5Salt);
+    public String doPostRequest(String service, String jsonString) throws IOException {
+        return postInfo.doCall(deviceUrl, service, jsonString, md5Salt);
     }
 
     public byte[] getMd5Salt() {

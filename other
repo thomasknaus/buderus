@@ -70,3 +70,39 @@ SuSwitchMode
 }
 
 {"ts":1606941731,"val":"auto"}
+
+Beim Auslesen der Werte per Get-Methode ist einzig und allein der übergebene
+User-Agent von Bedeutung. Beginnt der String des User-Agents mit "TeleHeater",
+so erhält man auch die (verschlüsselten) Werte.
+Bei allen anderen User-Agents erhält man eine HTML-Seite zur Antwort:
+"Sorry, the requested file does not exist on this server."
+
+Auch beim Schreiben von Werten ist einzig und allein der User-Agent in den
+Headern wichtig. Ob nun die Post- oder die Put-Methode für das Setzen von
+Werten verwendet wird, ist dem Gateway zum Glück egal.
+
+Auf jeden Fall ist aber die korrekte Vorgabe numerischer Werte erforderlich.
+Wird {"value":"15"} verschlüsselt und dann übergeben, wird die Temperatur
+nicht verändert. Bei {"value":15} hingegen erfolgt ein Update.
+
+Zwischenfazit:
+Mittels einer Post-Methode mit "User-Agent" = "TeleHeater" und einem JSON-Objekt,
+das die Zahlen nicht in Hochkommata setzt, funktioniert auch bei der Firmware 3.01.00
+das Setzen von Temperaturen - aus meinem Java-Programm heraus - zuverlässig
+und problemlos.
+
+Jetzt leider das "Aber":
+Ich habe das Modul 73_km200.pm auf meinem Raspberry Pi noch einmal
+angepasst und gebe definitiv korrekte Daten vor (mit demselben Data-String
+wird die Änderung in Java problemlos durchgeführt).
+Trotzdem werden die Änderungen nicht vom Gateway akzeptiert!
+
+Da ich überhaupt keine Ahnung habe, was in "HttpUtils_BlockingGet()" passiert,
+komme ich hier auch definitiv nicht weiter.
+Evtl. gibt es eine alternative Post-Methode, die hier verwendet werden könnte???
+
+Ich hoffe, dass sich nun jemand, der Perl besser beherrscht als ich, um dieses Problem
+kümmert. Ich bin gerne zu Tests und weiteren Schandtaten bereit.
+
+Gruß
+Christian
