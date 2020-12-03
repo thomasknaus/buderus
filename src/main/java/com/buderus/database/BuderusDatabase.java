@@ -6,8 +6,6 @@ import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.NitriteCollection;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-
 import static org.dizitart.no2.filters.Filters.eq;
 
 @Service

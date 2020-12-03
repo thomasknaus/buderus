@@ -1,9 +1,8 @@
 package com.buderus.connection.call.publish;
 
-import com.buderus.connection.call.subscribe.HeatCircuit1;
 import com.buderus.connection.call.subscribe.KM200SubscribeValues;
 
-public enum PublishTopics implements KM200SubscribeValues {
+public enum PushTopics implements KM200SubscribeValues {
 
     HEATCIRCUITHC1OPERATIONMODE {
         // String Value OperationModeHC
@@ -13,9 +12,7 @@ public enum PublishTopics implements KM200SubscribeValues {
         }
 
         @Override
-        public String getDescription() {
-            return "/km200/status/heatingCircuits/hc1/operationMode";
-        }
+        public String getDescription() { return /*"/km200/status*/"/heatingCircuits/hc1/operationMode"; }
     },
     HEATCIRCUITHC1TEMPOROOMSET {
         // Float Value
@@ -406,8 +403,8 @@ public enum PublishTopics implements KM200SubscribeValues {
 
 
 
-    public PublishTopics descriptionOf(String description) {
-        for (PublishTopics topic : PublishTopics.values()) {
+    public PushTopics descriptionOf(String description) {
+        for (PushTopics topic : PushTopics.values()) {
             if (topic.getDescription().equals(description)) {
                 return topic;
             }

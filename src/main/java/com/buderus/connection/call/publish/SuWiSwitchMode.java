@@ -1,7 +1,5 @@
 package com.buderus.connection.call.publish;
 
-import com.buderus.connection.config.KM200ConnectType;
-
 public enum SuWiSwitchMode {
     OFF ("off"), AUTOMATIC ("automatic"), FORCED ("forced");
 

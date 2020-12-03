@@ -1,15 +1,10 @@
 package com.buderus.controller;
 
 import com.buderus.connection.call.KM200RestCall;
-import com.buderus.connection.call.publish.PublishTopics;
-import com.buderus.connection.call.subscribe.HeatCircuit1;
-import com.buderus.connection.call.subscribe.WaterCircuit1;
-import com.buderus.connection.config.KM200ConnectType;
-import com.buderus.connection.config.KM200Converter;
-import com.buderus.connection.config.KM200Result;
-import com.buderus.connection.config.KM200Status;
+import com.buderus.connection.call.publish.OperationModeHC;
+import com.buderus.connection.call.publish.PushTopics;
 import com.buderus.connection.call.subscribe.SystemValues;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.buderus.connection.config.KM200Result;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +19,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/buderus")
@@ -42,15 +41,17 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/actualsupttmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Result> getActualSupplyTemperature() {
-        String message = restCall.recieveMessage(SystemValues.SYSAPPACTSUPTMP.getDescription());
-        final ObjectMapper mapper = new ObjectMapper();
         KM200Result result = null;
+        HttpStatus status = HttpStatus.OK;
         try {
+            String message = restCall.doGetRequest(SystemValues.SYSAPPACTSUPTMP.getDescription());
+            final ObjectMapper mapper = new ObjectMapper();
             result = mapper.readValue(message, KM200Result.class);
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.BAD_REQUEST;
         }
-        return new ResponseEntity<KM200Result>(result, HttpStatus.OK);
+        return new ResponseEntity<KM200Result>(result, status);
     }
 
     @ApiOperation(value = "Buderus desired supply temperature", response = Iterable.class, tags = "buderus")
@@ -60,15 +61,17 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/actualdesttmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Result> getDesiredSupplyTemperature() {
-        String message = restCall.recieveMessage(SystemValues.SYSTMPSUPT1.getDescription());
-        final ObjectMapper mapper = new ObjectMapper();
         KM200Result result = null;
+        HttpStatus status = HttpStatus.OK;
         try {
+            String message = restCall.doGetRequest(SystemValues.SYSTMPSUPT1.getDescription());
+            final ObjectMapper mapper = new ObjectMapper();
             result = mapper.readValue(message, KM200Result.class);
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.BAD_REQUEST;
         }
-        return new ResponseEntity<KM200Result>(result, HttpStatus.OK);
+        return new ResponseEntity<KM200Result>(result, status);
     }
 
     @ApiOperation(value = "Buderus set supply temperature", response = Iterable.class, tags = "buderus")
@@ -78,15 +81,17 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/actualsettmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Result> getSetSupplyTemperature() {
-        String message = restCall.recieveMessage(SystemValues.SYSTMPSUPT1SET.getDescription());
-        final ObjectMapper mapper = new ObjectMapper();
         KM200Result result = null;
+        HttpStatus status = HttpStatus.OK;
         try {
+            String message = restCall.doGetRequest(SystemValues.SYSTMPSUPT1SET.getDescription());
+            final ObjectMapper mapper = new ObjectMapper();
             result = mapper.readValue(message, KM200Result.class);
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.BAD_REQUEST;
         }
-        return new ResponseEntity<KM200Result>(result, HttpStatus.OK);
+        return new ResponseEntity<KM200Result>(result, status);
     }
 
     @ApiOperation(value = "Buderus recieve outdoor temperature", response = Iterable.class, tags = "buderus")
@@ -96,15 +101,17 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/outdoortmp", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<KM200Result> getOutdoorTmp() {
-        String message = restCall.recieveMessage(SystemValues.SYSTMPOUTT1.getDescription());
-        final ObjectMapper mapper = new ObjectMapper();
         KM200Result result = null;
+        HttpStatus status = HttpStatus.OK;
         try {
+            String message = restCall.doGetRequest(SystemValues.SYSTMPOUTT1.getDescription());
+            final ObjectMapper mapper = new ObjectMapper();
             result = mapper.readValue(message, KM200Result.class);
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.BAD_REQUEST;
         }
-        return new ResponseEntity<KM200Result>(result, HttpStatus.OK);
+        return new ResponseEntity<KM200Result>(result, status);
     }
 
     @ApiOperation(value = "Buderus heat circuit temperatur set", response = Iterable.class, tags = "buderus")
@@ -114,7 +121,35 @@ public class KM200Controller {
     })
     @RequestMapping(value = "/heatc1tmproomset", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> getHeatCircuitRoomTmpSet() {
-        String message = restCall.recieveMessage(PublishTopics.HEATCIRCUITHC1TEMPOROOMSET.getDescription());
-        return new ResponseEntity<String>(message, HttpStatus.OK);
+        String message = null;
+        HttpStatus status = HttpStatus.OK;
+        try {
+            message = restCall.doGetRequest(PushTopics.HEATCIRCUITHC1TEMPOROOMSET.getDescription());
+        } catch (IOException e) {
+            logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<String>(message, status);
+    }
+
+    @ApiOperation(value = "Buderus set operation mode", response = Iterable.class, tags = "buderus")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK", response = KM200Result.class),
+            @ApiResponse(code = 204, message = "no content")
+    })
+    @RequestMapping(value = "/setopmode", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<String> setHeatCircuitRoomTmpSet() {
+
+        String message = null;
+        HttpStatus status = HttpStatus.OK;
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("value", OperationModeHC.MANUAL.name().toLowerCase());
+        try {
+            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC1OPERATIONMODE.getDescription(), requestBody);
+        } catch (IOException e) {
+            logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<String>(message, status);
     }
 }
