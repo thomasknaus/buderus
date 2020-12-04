@@ -6,6 +6,11 @@ import org.springframework.http.ResponseEntity;
 public interface KM200GetControllerInterface {
 
     /*
+    * /system/appliance/actualPower
+     */
+    ResponseEntity<KM200Result> getActualPower();
+
+    /*
     * Aktuelle Vorlauftemperatur --> Heizungsmischer AI Eingang
      */
     ResponseEntity<KM200Result> getActualSupplyTemperature();

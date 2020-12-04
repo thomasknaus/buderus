@@ -9,7 +9,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/actualCHPower";
+            return "/heatSources/actualCHPower";
         }
     },
     HEATSRCACTDHWPOW {
@@ -20,7 +20,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/actualDHWPower";
+            return "/heatSources/actualDHWPower";
         }
     },
     HEATSRCACTMODULA {
@@ -31,7 +31,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/actualModulation";
+            return "/heatSources/actualModulation";
         }
     },
     HEATSRCACTPOW {
@@ -42,7 +42,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/actualPower";
+            return "/heatSources/actualPower";
         }
     },
     HEATSRCACTSUPTMP {
@@ -53,7 +53,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/actualSupplyTemperature";
+            return "/heatSources/actualSupplyTemperature";
         }
     },
     HEATSRCBURNMODULASET {
@@ -64,7 +64,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/burnerModulationSetpoint";
+            return "/heatSources/burnerModulationSetpoint";
         }
     },
     HEATSRCBURNPOWSET {
@@ -75,7 +75,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/burnerPowerSetpoint";
+            return "/heatSources/burnerPowerSetpoint";
         }
     },
     HEATSRCCHIMNEYSWEEP {
@@ -86,7 +86,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/ChimneySweeper";
+            return "/heatSources/ChimneySweeper";
         }
     },
     HEATSRCCHPUMPMODULA {
@@ -97,7 +97,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/CHpumpModulation";
+            return "/heatSources/CHpumpModulation";
         }
     },
     HEATSRCFLAMECUR {
@@ -108,7 +108,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/flameCurrent";
+            return "/heatSources/flameCurrent";
         }
     },
     HEATSRCFLAMESTAT {
@@ -119,7 +119,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/flameStatus";
+            return "/heatSources/flameStatus";
         }
     },
     HEATSRCGASAIRPRESS {
@@ -130,7 +130,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/gasAirPressure";
+            return "/heatSources/gasAirPressure";
         }
     },
     HEATSRCHS1 {
@@ -141,7 +141,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1";
+            return "/heatSources/hs1";
         }
     },
     HEATSRCHS1ACTCHPOW {
@@ -152,7 +152,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/actualCHPower";
+            return "/heatSources/hs1/actualCHPower";
         }
     },
     HEATSRCHS1ACTDHWPOW {
@@ -163,7 +163,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/actualDHWPower";
+            return "/heatSources/hs1/actualDHWPower";
         }
     },
     HEATSRCHS1ACTMODULA {
@@ -174,7 +174,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/actualModulation";
+            return "/heatSources/hs1/actualModulation";
         }
     },
     HEATSRCHS1ACTPOW {
@@ -185,7 +185,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/actualPower";
+            return "/heatSources/hs1/actualPower";
         }
     },
     HEATSRCHS1CHPUMPMODULA {
@@ -196,7 +196,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/CHpumpModulation";
+            return "/heatSources/hs1/CHpumpModulation";
         }
     },
     HEATSRCHS1ENGRESVOIR {
@@ -207,7 +207,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/energyReservoir";
+            return "/heatSources/hs1/energyReservoir";
         }
     },
     HEATSRCHS1FLAMESTAT {
@@ -218,7 +218,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/flameStatus";
+            return "/heatSources/hs1/flameStatus";
         }
     },
     HEATSRCHS1FUEL {
@@ -229,7 +229,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/fuel";
+            return "/heatSources/hs1/fuel";
         }
     },
     HEATSRCHS1FUELCALVALUE {
@@ -240,7 +240,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/fuel/caloricValue";
+            return "/heatSources/hs1/fuel/caloricValue";
         }
     },
     HEATSRCHS1FUELDENSITY {
@@ -251,7 +251,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/fuel/density";
+            return "/heatSources/hs1/fuel/density";
         }
     },
     HEATSRCHS1FUELCONCORFACT {
@@ -262,7 +262,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/fuelConsmptCorrFactor";
+            return "/heatSources/hs1/fuelConsmptCorrFactor";
         }
     },
     HEATSRCHS1INFO {
@@ -273,7 +273,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/info";
+            return "/heatSources/hs1/info";
         }
     },
     HEATSRCHS1NOMCHPOW {
@@ -284,7 +284,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/nominalCHPower";
+            return "/heatSources/hs1/nominalCHPower";
         }
     },
     HEATSRCHS1NOMDHWPOW {
@@ -295,7 +295,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/nominalDHWPower";
+            return "/heatSources/hs1/nominalDHWPower";
         }
     },
     HEATSRCHS1NOMFUELCONS {
@@ -306,7 +306,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/nominalFuelConsumption";
+            return "/heatSources/hs1/nominalFuelConsumption";
         }
     },
     HEATSRCHS1NUMBOFSTART {
@@ -317,7 +317,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/numberOfStarts";
+            return "/heatSources/hs1/numberOfStarts";
         }
     },
     HEATSRCHS1RESVOIRALERT {
@@ -328,7 +328,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/reservoirAlert";
+            return "/heatSources/hs1/reservoirAlert";
         }
     },
     HEATSRCHS1SUPTMPSET {
@@ -339,7 +339,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/supplyTemperatureSetpoint";
+            return "/heatSources/hs1/supplyTemperatureSetpoint";
         }
     },
     HEATSRCHS1TYPE {
@@ -350,7 +350,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/hs1/type";
+            return "/heatSources/hs1/type";
         }
     },
     HEATSRCINFO {
@@ -361,7 +361,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/info";
+            return "/heatSources/info";
         }
     },
     HEATSRCNOMCHPOW {
@@ -372,7 +372,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/nominalCHPower";
+            return "/heatSources/nominalCHPower";
         }
     },
     HEATSRCNOMDHWPOW {
@@ -383,7 +383,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/nominalDHWPower";
+            return "/heatSources/nominalDHWPower";
         }
     },
     HEATSRCNUMOFSTART {
@@ -394,7 +394,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/numberOfStarts";
+            return "/heatSources/numberOfStarts";
         }
     },
     HEATSRCPOWSET {
@@ -405,7 +405,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/powerSetpoint";
+            return "/heatSources/powerSetpoint";
         }
     },
     HEATSRCRETTMP {
@@ -416,7 +416,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/returnTemperature";
+            return "/heatSources/returnTemperature";
         }
     },
     HEATSRCSUPTMPSET {
@@ -427,7 +427,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/supplyTemperatureSetpoint";
+            return "/heatSources/supplyTemperatureSetpoint";
         }
     },
     HEATSRCSYSPRESS {
@@ -438,7 +438,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/systemPressure";
+            return "/heatSources/systemPressure";
         }
     },
     HEATSRCWORKTIME {
@@ -449,7 +449,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/workingTime";
+            return "/heatSources/workingTime";
         }
     },
     HEATSRCWORKTIMECENTRHEAT {
@@ -460,7 +460,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/workingTime/centralHeating";
+            return "/heatSources/workingTime/centralHeating";
         }
     },
     HEATSRCWORKTIMESECBURNER {
@@ -471,7 +471,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/workingTime/secondBurner";
+            return "/heatSources/workingTime/secondBurner";
         }
     },
     HEATSRCWORKTIMETOTALSYS {
@@ -482,7 +482,7 @@ public enum HeatSources implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/heatSources/workingTime/totalSystem";
+            return "/heatSources/workingTime/totalSystem";
         }
     };
 

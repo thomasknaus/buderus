@@ -1,7 +1,6 @@
 package com.buderus.controller;
 
 import com.buderus.connection.call.KM200RestCall;
-import com.buderus.connection.call.publish.OperationModeHC;
 import com.buderus.connection.call.publish.PushTopics;
 import com.buderus.connection.call.publish.SuWiSwitchMode;
 import com.buderus.connection.call.subscribe.SystemValues;
@@ -20,17 +19,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
 @RestController
 @RequestMapping("/api/buderus")
 @Api(tags = "buderus")
-public class KM200ChangeController implements KM200PutControllerInterface, KM200GetControllerInterface{
+public class KM200ChangeController extends KM200RestHelper implements KM200PutControllerInterface, KM200GetControllerInterface{
 
     private final Logger logger = LoggerFactory.getLogger(KM200ChangeController.class);
 
     @Autowired
     private KM200RestCall restCall;
+
+    @Override
+    public ResponseEntity<KM200Result> getActualPower() {
+        return null;
+    }
 
     @Override
     @ApiOperation(value = "Buderus actual supply temperature", response = Iterable.class, tags = "buderus")
@@ -95,8 +97,10 @@ public class KM200ChangeController implements KM200PutControllerInterface, KM200
         return new ResponseEntity<KM200Result>(result, status);
     }
 
+    // PUT Methods
+
     @Override
-    @ApiOperation(value = "Buderus change operation mode", response = Iterable.class, tags = "buderus")
+    @ApiOperation(value = "Buderus change operation mode, switch between summer and winter mode", response = Iterable.class, tags = "buderus")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success|OK", response = String.class),
             @ApiResponse(code = 204, message = "no content!")})
@@ -105,33 +109,12 @@ public class KM200ChangeController implements KM200PutControllerInterface, KM200
         String message = null;
         HttpStatus status = HttpStatus.OK;
         JSONObject jsonObj = new JSONObject();
-        OperationModeHC operationMode = OperationModeHC.contains(mode);
+        SuWiSwitchMode operationMode = SuWiSwitchMode.contains(mode);
         if(operationMode == null){
             return new ResponseEntity<String>("Operation mode is not valid", HttpStatus.BAD_REQUEST);
         }
         jsonObj.put("value", operationMode.name().toLowerCase());
         try {
-            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC1OPERATIONMODE.getDescription(), jsonObj.toJSONString());
-        } catch (Exception e) {
-            logger.error("{}", e.getMessage(), e);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return new ResponseEntity<String>(message, status);
-    }
-
-    @Override
-    @ApiOperation(value = "Buderus turn heat off", response = Iterable.class, tags = "buderus")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK", response = String.class),
-            @ApiResponse(code = 204, message = "no content!")})
-    @RequestMapping(value = "/turnheatoff", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> turnHeatOff() {
-        String message = null;
-        HttpStatus status = HttpStatus.OK;
-        JSONObject jsonObj = new JSONObject();
-        jsonObj.put("value", SuWiSwitchMode.OFF.name().toLowerCase());
-        try {
-            // wo anders hin
             message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC1SUWISWITCHMODE.getDescription(), jsonObj.toJSONString());
             message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC2SUWISWITCHMODE.getDescription(), jsonObj.toJSONString());
         } catch (Exception e) {
@@ -142,13 +125,43 @@ public class KM200ChangeController implements KM200PutControllerInterface, KM200
     }
 
     @Override
+    @ApiOperation(value = "Buderus turn heat off", response = Iterable.class, tags = "buderus")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK", response = Boolean.class),
+            @ApiResponse(code = 204, message = "no content!")})
+    @RequestMapping(value = "/turnheatoff", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> turnHeatOff() {
+        HttpStatus status = HttpStatus.OK;
+        Boolean result = Boolean.FALSE;
+        try {
+            super.turnHeatOff(restCall);
+        } catch (Exception e) {
+            logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Boolean>(result, status);
+    }
+
+    @Override
     @ApiOperation(value = "Buderus turn room tmp off", response = Iterable.class, tags = "buderus")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success|OK", response = String.class),
+            @ApiResponse(code = 200, message = "Success|OK", response = Boolean.class),
             @ApiResponse(code = 204, message = "no content!")})
     @RequestMapping(value = "/turnroomtmpoff", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> turnRoomTmpOff() {
-        return null;
+        String message = null;
+        HttpStatus status = HttpStatus.OK;
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put("value", Float.valueOf(0));
+        try {
+            // wo anders hin
+            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC1TEMPOROOMSET.getDescription(), jsonObj.toJSONString());
+            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC2TEMPOROOMSET.getDescription(), jsonObj.toJSONString());
+        } catch (Exception e) {
+            logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<String>(message, status);
     }
 
     @Override
@@ -158,7 +171,19 @@ public class KM200ChangeController implements KM200PutControllerInterface, KM200
             @ApiResponse(code = 204, message = "no content!")})
     @RequestMapping(value = "/chgroomtmp/{tmp}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> setRoomTmp(@ApiParam(value = "room temperature", required = true) @PathVariable("tmp") String tmp) {
-        return null;
+        String message = null;
+        HttpStatus status = HttpStatus.OK;
+        JSONObject jsonObj = new JSONObject();
+        try {
+            jsonObj.put("value", Float.valueOf(tmp));
+            // wo anders hin
+            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC1TMPLEVELCOMF2.getDescription(), jsonObj.toJSONString());
+            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC2TMPLEVELCOMF2.getDescription(), jsonObj.toJSONString());
+        } catch (Exception e) {
+            logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<String>(message, status);
     }
 
     @Override
@@ -167,7 +192,15 @@ public class KM200ChangeController implements KM200PutControllerInterface, KM200
             @ApiResponse(code = 200, message = "Success|OK", response = String.class),
             @ApiResponse(code = 204, message = "no content!")})
     @RequestMapping(value = "/turnheaton", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> turnHeatOn() {
-        return null;
+    public ResponseEntity<Boolean> turnHeatOn() {
+        HttpStatus status = HttpStatus.OK;
+        Boolean result = Boolean.FALSE;
+        try {
+            super.turnHeatOn(restCall);
+        } catch (Exception e) {
+            logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Boolean>(result, status);
     }
 }

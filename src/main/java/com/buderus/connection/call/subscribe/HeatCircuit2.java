@@ -10,7 +10,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/currentRoomSetpoint";
+            return "/heatingCircuits/hc2/currentRoomSetpoint";
         }
     },
     HEATHC2ACTSUPTMP {
@@ -21,7 +21,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/actualSupplyTemperature";
+            return "/heatingCircuits/hc2/actualSupplyTemperature";
         }
     },
     HEATHC2MANROOMSET {
@@ -32,7 +32,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/manualRoomSetpoint";
+            return "/heatingCircuits/hc2/manualRoomSetpoint";
         }
     },
     HEATHC2TEMPROOMSET {
@@ -43,7 +43,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/temporaryRoomSetpoint";
+            return "/heatingCircuits/hc2/temporaryRoomSetpoint";
         }
     },
     HEATHC2ROOMTMP {
@@ -54,7 +54,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/roomtemperature";
+            return "/heatingCircuits/hc2/roomtemperature";
         }
     },
     HEATHC2TIMENSET {
@@ -65,7 +65,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/timeToNextSetpoint";
+            return "/heatingCircuits/hc2/timeToNextSetpoint";
         }
     },
     HEATHC2NSET {
@@ -76,7 +76,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/nextSetpoint";
+            return "/heatingCircuits/hc2/nextSetpoint";
         }
     },
     HEATHC2SWITCHPRG {
@@ -87,7 +87,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/switchPrograms";
+            return "/heatingCircuits/hc2/switchPrograms";
         }
     },
     HEATHC2TMPLEVEL {
@@ -98,7 +98,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/temperatureLevels";
+            return "/heatingCircuits/hc2/temperatureLevels";
         }
     },
     HEATHC2PUMPMODULA {
@@ -109,7 +109,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/pumpModulation";
+            return "/heatingCircuits/hc2/pumpModulation";
         }
     },
     HEATHC2DESIGNTEMP {
@@ -120,7 +120,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/designTemp";
+            return "/heatingCircuits/hc2/designTemp";
         }
     },
     HEATHC2ROOMTEMPOFFSET {
@@ -131,7 +131,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/roomTempOffset";
+            return "/heatingCircuits/hc2/roomTempOffset";
         }
     },
     HEATHC2HEATCURVEMAX {
@@ -142,7 +142,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/heatCurveMax";
+            return "/heatingCircuits/hc2/heatCurveMax";
         }
     },
     HEATHC2CONTROLTYPE {
@@ -153,7 +153,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/controlType";
+            return "/heatingCircuits/hc2/controlType";
         }
     },
     HEATHC2ROOMINFLUENCE {
@@ -164,7 +164,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/roomInfluence";
+            return "/heatingCircuits/hc2/roomInfluence";
         }
     },
     HEATHC2CUROPMODEINFO {
@@ -175,7 +175,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/currentOpModeInfo";
+            return "/heatingCircuits/hc2/currentOpModeInfo";
         }
     },
     HEATHC2STATUS {
@@ -186,7 +186,7 @@ public enum HeatCircuit2 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/status";
+            return "/heatingCircuits/hc2/status";
         }
     };
 

@@ -12,7 +12,9 @@ public enum PushTopics implements KM200SubscribeValues {
         }
 
         @Override
-        public String getDescription() { return /*"/km200/status*/"/heatingCircuits/hc1/operationMode"; }
+        public String getDescription() {
+            return "/heatingCircuits/hc1/operationMode";
+        }
     },
     HEATCIRCUITHC1TEMPOROOMSET {
         // Float Value
@@ -23,7 +25,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return /*"/km200/status*/"/heatingCircuits/hc1/temporaryRoomSetpoint";
+            return "/heatingCircuits/hc1/temporaryRoomSetpoint";
         }
     },
     HEATCIRCUITHC1ACTSWITCHPROG {
@@ -35,7 +37,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc1/activeSwitchProgram";
+            return "/heatingCircuits/hc1/activeSwitchProgram";
         }
     },
     HEATCIRCUITHC1SUWITHREESHOLD {
@@ -47,7 +49,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return /*"/km200/status*/"/heatingCircuits/hc1/suWiThreshold";
+            return "/heatingCircuits/hc1/suWiThreshold";
         }
     },
     HEATCIRCUITHC1SUWISWITCHMODE {
@@ -59,7 +61,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return /*"/km200/status*/"/heatingCircuits/hc1/suWiSwitchMode";
+            return "/heatingCircuits/hc1/suWiSwitchMode";
         }
     },
     HEATCIRCUITHC1TMPROOMSET {
@@ -71,7 +73,31 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return /*"/km200/status*/"/heatingCircuits/hc1/temperatureRoomSetpoint";
+            return "/heatingCircuits/hc1/temperatureRoomSetpoint";
+        }
+    },
+    HEATCIRCUITHC1TMPLEVELCOMF2 {
+        // String Value SuWiSwitchMode
+        @Override
+        public String toString() {
+            return "HEATCIRCUITHC1TMPLEVELCOMF2";
+        }
+
+        @Override
+        public String getDescription() {
+            return "/heatingCircuits/hc1/temperatureLevels/comfort2";
+        }
+    },
+    HEATCIRCUITHC1TMPLEVELECO {
+        // String Value SuWiSwitchMode
+        @Override
+        public String toString() {
+            return "HEATCIRCUITHC1TMPLEVELECO";
+        }
+
+        @Override
+        public String getDescription() {
+            return "/heatingCircuits/hc1/temperatureLevels/eco";
         }
     },
     HEATCIRCUITHC2OPERATIONMODE {
@@ -83,7 +109,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/operationMode";
+            return "/heatingCircuits/hc2/operationMode";
         }
     },
     HEATCIRCUITHC2TEMPOROOMSET {
@@ -95,7 +121,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/temporaryRoomSetpoint";
+            return "/heatingCircuits/hc2/temporaryRoomSetpoint";
         }
     },
     HEATCIRCUITHC2ACTSWITCHPROG {
@@ -107,7 +133,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/activeSwitchProgram";
+            return "/heatingCircuits/hc2/activeSwitchProgram";
         }
     },
     HEATCIRCUITHC2SUWITHREESHOLD {
@@ -119,7 +145,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/suWiThreshold";
+            return "/heatingCircuits/hc2/suWiThreshold";
         }
     },
     HEATCIRCUITHC2TMPROOMSET {
@@ -131,7 +157,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/temperatureRoomSetpoint";
+            return "/heatingCircuits/hc2/temperatureRoomSetpoint";
         }
     },
     HEATCIRCUITHC2SUWISWITCHMODE {
@@ -143,7 +169,30 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/heatingCircuits/hc2/suWiSwitchMode";
+            return "/heatingCircuits/hc2/suWiSwitchMode";
+        }
+    },
+    HEATCIRCUITHC2TMPLEVELCOMF2 {
+        // String Value SuWiSwitchMode
+        @Override
+        public String toString() {
+            return "HEATCIRCUITHC2TMPLEVELCOMF2";
+        }
+
+        @Override
+        public String getDescription() {
+            return "/heatingCircuits/hc2/temperatureLevels/comfort2";
+        }
+    },
+    HEATCIRCUITHC2TMPLEVELECO {
+        @Override
+        public String toString() {
+            return "HEATCIRCUITHC2TMPLEVELECO";
+        }
+
+        @Override
+        public String getDescription() {
+            return "/heatingCircuits/hc2/temperatureLevels/eco";
         }
     },
     DHWCURCUITDHW1CHARGE {
@@ -155,7 +204,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/dhwCircuits/dhw1/charge";
+            return "/dhwCircuits/dhw1/charge";
         }
     },
     DHWCURCUITDHW1CHARGEDURATION {
@@ -167,7 +216,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/dhwCircuits/dhw1/chargeDuration";
+            return "/dhwCircuits/dhw1/chargeDuration";
         }
     },
     DHWCURCUITDHW1OPERATIONMODE {
@@ -179,7 +228,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/dhwCircuits/dhw1/operationMode";
+            return "/dhwCircuits/dhw1/operationMode";
         }
     },
     DHWCURCUITDHW1SINGLECHARGESET {
@@ -191,7 +240,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/dhwCircuits/dhw1/singleChargeSetpoint";
+            return "/dhwCircuits/dhw1/singleChargeSetpoint";
         }
     },
     DHWCURCUITDHW1TMPLEVELHIGH {
@@ -203,7 +252,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/dhwCircuits/dhw1/temperatureLevels/high";
+            return "/dhwCircuits/dhw1/temperatureLevels/high";
         }
     },
     SYSMINOUTTEMP {
@@ -215,7 +264,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/minOutdoorTemp";
+            return "/system/minOutdoorTemp";
         }
     },
     SYSHOLIDAYMODEHM1ASSIGN {
@@ -227,7 +276,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm1/assignedTo";
+            return "/system/holidayModes/hm1/assignedTo";
         }
     },
     SYSHOLIDAYMODEHM1DHWMODE {
@@ -239,7 +288,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm1/dhwMode";
+            return "/system/holidayModes/hm1/dhwMode";
         }
     },
     SYSHOLIDAYMODEHM1HCMODE {
@@ -251,7 +300,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm1/hcMode";
+            return "/system/holidayModes/hm1/hcMode";
         }
     },
     SYSHOLIDAYMODEHM2ASSIGN {
@@ -263,7 +312,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm2/assignedTo";
+            return "/system/holidayModes/hm2/assignedTo";
         }
     },
     SYSHOLIDAYMODEHM2DHWMODE {
@@ -275,7 +324,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm2/dhwMode";
+            return "/system/holidayModes/hm2/dhwMode";
         }
     },
     SYSHOLIDAYMODEHM2HCMODE {
@@ -287,7 +336,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm2/hcMode";
+            return "/system/holidayModes/hm2/hcMode";
         }
     },
     SYSHOLIDAYMODEHM3ASSIGN {
@@ -299,7 +348,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm3/assignedTo";
+            return "/system/holidayModes/hm3/assignedTo";
         }
     },
     SYSHOLIDAYMODEHM3DHWMODE {
@@ -311,7 +360,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm3/dhwMode";
+            return "/system/holidayModes/hm3/dhwMode";
         }
     },
     SYSHOLIDAYMODEHM3HCMODE {
@@ -323,7 +372,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm3/hcMode";
+            return "/system/holidayModes/hm3/hcMode";
         }
     },
     SYSHOLIDAYMODEHM4ASSIGN {
@@ -335,7 +384,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm4/assignedTo";
+            return "/system/holidayModes/hm4/assignedTo";
         }
     },
     SYSHOLIDAYMODEHM4DHWMODE {
@@ -347,7 +396,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm4/dhwMode";
+            return "/system/holidayModes/hm4/dhwMode";
         }
     },
     SYSHOLIDAYMODEHM4HCMODE {
@@ -359,7 +408,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm4/hcMode";
+            return "/system/holidayModes/hm4/hcMode";
         }
     },
     SYSHOLIDAYMODEHM5ASSIGN {
@@ -371,7 +420,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm5/assignedTo";
+            return "/system/holidayModes/hm5/assignedTo";
         }
     },
     SYSHOLIDAYMODEHM5DHWMODE {
@@ -383,7 +432,7 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm5/dhwMode";
+            return "/system/holidayModes/hm5/dhwMode";
         }
     },
     SYSHOLIDAYMODEHM5HCMODE {
@@ -395,12 +444,9 @@ public enum PushTopics implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "/km200/status/system/holidayModes/hm5/hcMode";
+            return "/system/holidayModes/hm5/hcMode";
         }
     };
-
-
-
 
 
     public PushTopics descriptionOf(String description) {

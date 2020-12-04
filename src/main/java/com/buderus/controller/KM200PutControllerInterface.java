@@ -14,7 +14,7 @@ public interface KM200PutControllerInterface {
     * /heatingCircuits/hc1/suWiSwitchMode: OFF --> Heizungsmischer Q2 Ausgang
     * /heatingCircuits/hc2/suWiSwitchMode: OFF --> Heizungsmischer Q2 Ausgang
      */
-    ResponseEntity<String> turnHeatOff();
+    ResponseEntity<Boolean> turnHeatOff();
 
     /*
     * /heatingCircuits/hc1/temporaryRoomSetpoint (floatValue): 0 = OFF  --> intelligente Raumsteuerung AQt Ausgang
@@ -32,5 +32,5 @@ public interface KM200PutControllerInterface {
     * /heatingCircuits/hc1/suWiSwitchMode: FORCED --> Heizungsmischer Q1 Ausgang
     * /heatingCircuits/hc2/suWiSwitchMode: FORCED --> Heizungsmischer Q1 Ausgang
      */
-    ResponseEntity<String> turnHeatOn();
+    ResponseEntity<Boolean> turnHeatOn();
 }

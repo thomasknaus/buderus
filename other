@@ -32,6 +32,14 @@
 2020-11-27 20:43:52.664 <info>  Writable: /heatingCircuits/hc1/temporaryRoomSetpoint (floatValue): 5 - 30  --> intelligente Raumsteuerung AQt
 2020-11-27 20:43:55.200 <info>  Writable: /heatingCircuits/hc2/temporaryRoomSetpoint (floatValue): 5 - 30 --> intelligente Raumsteuerung AQt
 
+/heatingCircuits/hc1/manualRoomSetpoint
+/system/minOutdoorTemp
+
+/heatingCircuits/hc2/suWiSwitchMode --> Summer mode = off
+/heatingCircuits/hc2/temperatureLevels/comfort2 --> intelligente Raumsteuerung AQt
+/heatingCircuits/hc2/temperatureLevels/eco --> only for off
+/heatingCircuits/hc2/activeSwitchProgram --> switch between "A" and "B". "A" is "on", "B" is "off"
+
 OperationMode
 {
   "native" : {

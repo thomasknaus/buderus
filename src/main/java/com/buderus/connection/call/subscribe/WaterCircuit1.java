@@ -9,7 +9,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/actualTemp";
+            return "/dhwCircuits/dhw1/actualTemp";
         }
     },
     DHW1CIRCPSTARTPH {
@@ -20,7 +20,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/cpStartph";
+            return "/dhwCircuits/dhw1/cpStartph";
         }
     },
     DHW1CIRCURSET {
@@ -31,7 +31,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/currentSetpoint";
+            return "/dhwCircuits/dhw1/currentSetpoint";
         }
     },
     DHW1CIRSTATUS {
@@ -42,7 +42,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/status";
+            return "/dhwCircuits/dhw1/status";
         }
     },
     DHW1CIRSWITCHPRG {
@@ -53,7 +53,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/switchPrograms";
+            return "/dhwCircuits/dhw1/switchPrograms";
         }
     },
     DHW1CIRTDMODE {
@@ -64,7 +64,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/tdMode";
+            return "/dhwCircuits/dhw1/tdMode";
         }
     },
     DHW1CIRTDSETPOINT {
@@ -75,7 +75,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/tdsetPoint";
+            return "/dhwCircuits/dhw1/tdsetPoint";
         }
     },
     DHW1CIRTMPLEVEL {
@@ -86,7 +86,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/temperatureLevels";
+            return "/dhwCircuits/dhw1/temperatureLevels";
         }
     },
     DHW1CIRTMPLEVELOFF {
@@ -97,7 +97,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/temperatureLevels/off";
+            return "/dhwCircuits/dhw1/temperatureLevels/off";
         }
     },
     DHW1CIRWATERFLOW {
@@ -108,7 +108,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/waterFlow";
+            return "/dhwCircuits/dhw1/waterFlow";
         }
     },
     DHW1CIRWORKIME {
@@ -119,7 +119,7 @@ public enum WaterCircuit1 implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/dhwCircuits/dhw1/workingTime";
+            return "/dhwCircuits/dhw1/workingTime";
         }
     };
 

@@ -2,7 +2,7 @@ package com.buderus.connection.call;
 
 import com.buderus.connection.call.publish.KM200Post;
 import com.buderus.connection.call.subscribe.KM200Get;
-import org.apache.commons.httpclient.*;
+import org.apache.commons.httpclient.HttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.xml.bind.DatatypeConverter;
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Service
 public class KM200RestCall {

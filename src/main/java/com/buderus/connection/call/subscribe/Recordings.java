@@ -6,7 +6,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORD"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings";
+            return "/recordings";
         }
     },
     RECORDSHEATCIRCUIT {
@@ -14,7 +14,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSHEATCIRCUIT"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/heatingCircuits";
+            return "/recordings/heatingCircuits";
         }
     },
     RECORDSHEATCIRCUITHC1 {
@@ -22,7 +22,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSHEATCIRCUITHC1"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/heatingCircuits/hc1";
+            return "/recordings/heatingCircuits/hc1";
         }
     },
     RECORDSHEATCIRCUITHC1ROOMTMP {
@@ -30,7 +30,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSHEATCIRCUITHC1ROOMTMP"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/heatingCircuits/hc1/roomtemperature";
+            return "/recordings/heatingCircuits/hc1/roomtemperature";
         }
     },
     RECORDSHEATSRC {
@@ -38,7 +38,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSHEATSRC"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/heatSources";
+            return "/recordings/heatSources";
         }
     },
     RECORDSHEATSRCACTCHPOW {
@@ -46,7 +46,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSHEATSRCACTCHPOW"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/heatSources/actualCHPower";
+            return "/recordings/heatSources/actualCHPower";
         }
     },
     RECORDSHEATSRCACTDHWPOW {
@@ -54,7 +54,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSHEATSRCACTDHWPOW"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/heatSources/actualDHWPower";
+            return "/recordings/heatSources/actualDHWPower";
         }
     },
     RECORDSHEATSRCACTPOW {
@@ -62,7 +62,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSHEATSRCACTPOW"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/heatSources/actualPower";
+            return "/recordings/heatSources/actualPower";
         }
     },
     RECORDSHEATSRCHS1 {
@@ -70,7 +70,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSHEATSRCHS1"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/heatSources/hs1";
+            return "/recordings/heatSources/hs1";
         }
     },
     RECORDSHEATSRCHS1ACTPOW {
@@ -78,7 +78,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSHEATSRCHS1ACTPOW"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/heatSources/hs1/actualPower";
+            return "/recordings/heatSources/hs1/actualPower";
         }
     },
     RECORDSYS {
@@ -86,7 +86,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSYS"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/system";
+            return "/recordings/system";
         }
     },
     RECORDSYSHEATSRC{
@@ -94,7 +94,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSYSHEATSRC"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/system/heatSources";
+            return "/recordings/system/heatSources";
         }
     },
     RECORDSYSHEATSRCHS1 {
@@ -102,7 +102,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSYSHEATSRCHS1"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/system/heatSources/hs1";
+            return "/recordings/system/heatSources/hs1";
         }
     },
     RECORDSYSHEATSRCHS1ACTPOW {
@@ -110,7 +110,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSYSHEATSRCHS1ACTPOW"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/system/heatSources/hs1/actualPower";
+            return "/recordings/system/heatSources/hs1/actualPower";
         }
     },
     RECORDSYSSENSOR {
@@ -118,7 +118,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSYSSENSOR"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/system/sensors";
+            return "/recordings/system/sensors";
         }
     },
     RECORDSYSSENSORTMP {
@@ -126,7 +126,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSYSSENSORTMP"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/system/sensors/temperatures";
+            return "/recordings/system/sensors/temperatures";
         }
     },
     RECORDSYSSENSORTMPOUTT1 {
@@ -134,7 +134,7 @@ public enum Recordings implements KM200SubscribeValues{
         public String toString() { return "RECORDSYSSENSORTMPOUTT1"; }
         @Override
         public String getDescription() {
-            return "km200/status/recordings/system/sensors/temperatures/outdoor_t1";
+            return "/recordings/system/sensors/temperatures/outdoor_t1";
         }
     };
 

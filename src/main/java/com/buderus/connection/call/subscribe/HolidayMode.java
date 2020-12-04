@@ -9,7 +9,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes";
+            return "/system/holidayModes";
         }
     },
     SYSHOLIDAYMODHM1 {
@@ -20,7 +20,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm1";
+            return "/system/holidayModes/hm1";
         }
     },
     SYSHOLIDAYMODHM1DEL {
@@ -31,7 +31,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm1/delete";
+            return "/system/holidayModes/hm1/delete";
         }
     },
     SYSHOLIDAYMODHM1STARTSTOP {
@@ -42,7 +42,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm1/startStop";
+            return "/system/holidayModes/hm1/startStop";
         }
     },
     SYSHOLIDAYMODHM2 {
@@ -53,7 +53,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm2";
+            return "/system/holidayModes/hm2";
         }
     },
     SYSHOLIDAYMODHM2DEL {
@@ -64,7 +64,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm2/delete";
+            return "/system/holidayModes/hm2/delete";
         }
     },
     SYSHOLIDAYMODHM2STARTSTOP {
@@ -75,7 +75,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm2/startStop";
+            return "/system/holidayModes/hm2/startStop";
         }
     },
     SYSHOLIDAYMODHM3 {
@@ -86,7 +86,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm3";
+            return "/system/holidayModes/hm3";
         }
     },
     SYSHOLIDAYMODHM3DEL {
@@ -97,7 +97,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm3/delete";
+            return "/system/holidayModes/hm3/delete";
         }
     },
     SYSHOLIDAYMODHM3STARTSTOP {
@@ -108,7 +108,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm3/startStop";
+            return "/system/holidayModes/hm3/startStop";
         }
     },
     SYSHOLIDAYMODHM4 {
@@ -119,7 +119,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm4";
+            return "/system/holidayModes/hm4";
         }
     },
     SYSHOLIDAYMODHM4DEL {
@@ -130,7 +130,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm4/delete";
+            return "/system/holidayModes/hm4/delete";
         }
     },
     SYSHOLIDAYMODHM4STARTSTOP {
@@ -141,7 +141,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm4/startStop";
+            return "/system/holidayModes/hm4/startStop";
         }
     },
     SYSHOLIDAYMODHM5 {
@@ -152,7 +152,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm5";
+            return "/system/holidayModes/hm5";
         }
     },
     SYSHOLIDAYMODHM5DEL {
@@ -163,7 +163,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm5/delete";
+            return "/system/holidayModes/hm5/delete";
         }
     },
     SYSHOLIDAYMODHM5STARTSTOP {
@@ -174,7 +174,7 @@ public enum HolidayMode implements KM200SubscribeValues {
 
         @Override
         public String getDescription() {
-            return "km200/status/system/holidayModes/hm5/startStop";
+            return "/system/holidayModes/hm5/startStop";
         }
     };
 
