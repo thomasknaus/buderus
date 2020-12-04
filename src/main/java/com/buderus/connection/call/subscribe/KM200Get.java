@@ -24,15 +24,21 @@ import java.util.Map;
 public class KM200Get extends KM200RestAbstract {
 
     @Override
-    public String doCall(String deviceUrl, String service, String jsonString, byte[] md5Salt) throws IOException {
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpGet get = new HttpGet("http://" + deviceUrl + service);
+    public String doCall(String deviceUrl, String service, String jsonString, byte[] md5Salt) throws Exception {
+        String result = null;
+        HttpClient client = createClient();
+        synchronized (client) {
+            HttpGet get = new HttpGet("http://" + deviceUrl + service);
 
-        addHeader(get);
-        addRequestConfig(get);
-        HttpResponse response = client.execute(get);
-        String result = convertResponseToString(response, md5Salt);
-        get.releaseConnection();
-        return result;
+            addHeader(get);
+            addRequestConfig(get);
+            HttpResponse response = client.execute(get);
+            try {
+                result = convertResponseToString(response, md5Salt);
+            } finally {
+                get.releaseConnection();
+            }
+            return result;
+        }
     }
 }

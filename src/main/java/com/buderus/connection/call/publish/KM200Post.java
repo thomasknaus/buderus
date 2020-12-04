@@ -21,20 +21,28 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class KM200Put extends KM200RestAbstract {
+public class KM200Post extends KM200RestAbstract {
 
     @Override
-    public String doCall(String deviceUrl, String service, String jsonString, byte[] md5Salt) throws IOException {
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpPost put = new HttpPost("http://" + deviceUrl + service);
+    public String doCall(String deviceUrl, String service, String jsonString, byte[] md5Salt) throws Exception {
+        String result = null;
+        HttpClient client = createClient();
 
-        addHeader(put);
-        //addRequestConfig(put);
-        // Create some NameValuePair for HttpPost parameters
-        addEntityToRequest(put, jsonString, md5Salt);
-        HttpResponse response = client.execute(put);
-        String result = convertResponseToString(response, md5Salt);
-        put.releaseConnection();
-        return result;
+        synchronized (client) {
+
+            HttpPost put = new HttpPost("http://" + deviceUrl + service);
+
+            addHeader(put);
+            //addRequestConfig(put);
+            // Create some NameValuePair for HttpPost parameters
+            addEntityToRequest(put, jsonString, md5Salt);
+            HttpResponse response = client.execute(put);
+            try {
+                result = convertResponseToString(response, md5Salt);
+            } finally {
+                put.releaseConnection();
+            }
+            return result;
+        }
     }
 }

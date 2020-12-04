@@ -13,7 +13,7 @@ public enum OperationModeHC {
         } else if(value.equals(MANUAL.value)){
             return OperationModeHC.MANUAL;
         } else {
-            return OperationModeHC.AUTO;
+            return null;
         }
     }
 
