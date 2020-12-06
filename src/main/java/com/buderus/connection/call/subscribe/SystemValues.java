@@ -94,7 +94,7 @@ public enum SystemValues implements KM200SubscribeValues{
         }
     },
     /**
-     * Solltemperatur Vorlauf {@link SystemValues#SYSTMPSUPT1}.
+     * Vorlauftemperatur {@link SystemValues#SYSTMPSUPT1}.
      */
     SYSTMPSUPT1 {
         @Override
@@ -102,6 +102,9 @@ public enum SystemValues implements KM200SubscribeValues{
         @Override
         public String getDescription() { return "/system/sensors/temperatures/supply_t1"; }
     },
+    /**
+     * Solltemperatur Vorlauf {@link SystemValues#SYSTMPSUPT1SET}.
+     */
     SYSTMPSUPT1SET {
         @Override
         public String toString() { return "SYSTMPSUPT1SET"; }
@@ -126,10 +129,6 @@ public enum SystemValues implements KM200SubscribeValues{
         @Override
         public String getDescription() { return "/system/appliance/actualPower"; }
     },
-
-    /**
-     * Aktuelle Vorlauftemperatur {@link SystemValues#SYSAPPACTSUPTMP}.
-     */
     SYSAPPACTSUPTMP {
         @Override
         public String toString() { return "SYSAPPACTSUPTMP"; }

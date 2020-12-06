@@ -12,22 +12,28 @@ public abstract class KM200RestHelper {
 
     private final Logger logger = LoggerFactory.getLogger(KM200RestHelper.class);
 
-    protected ResponseEntity turnHeatOff(KM200RestCall restCall) throws Exception {
+    protected ResponseEntity turnHeatCuircuitOff(KM200RestCall restCall, String heatService, String ecoService) throws Exception {
         HttpStatus status = HttpStatus.OK;
-        switchProgram(restCall, "B");
+        switchProgram(restCall, "B", heatService);
+        setEcoModeToNull(restCall, ecoService);
         return new ResponseEntity<Boolean>(Boolean.TRUE, status);
     }
 
-    protected ResponseEntity turnHeatOn(KM200RestCall restCall) throws Exception {
+    protected ResponseEntity turnHeatOn(KM200RestCall restCall, String service) throws Exception {
         HttpStatus status = HttpStatus.OK;
-        switchProgram(restCall, "A");
+        switchProgram(restCall, "A", service);
         return new ResponseEntity<Boolean>(Boolean.TRUE, status);
     }
 
-    private void switchProgram(KM200RestCall restCall, String value) throws Exception {
+    private void switchProgram(KM200RestCall restCall, String value, String service) throws Exception {
         JSONObject jsonObj = new JSONObject();
         jsonObj.put("value", value);
-        restCall.doPostRequest(PushTopics.HEATCIRCUITHC1ACTSWITCHPROG.getDescription(), jsonObj.toJSONString());
-        restCall.doPostRequest(PushTopics.HEATCIRCUITHC2ACTSWITCHPROG.getDescription(), jsonObj.toJSONString());
+        restCall.doPostRequest(service, jsonObj.toJSONString());
+    }
+
+    private void setEcoModeToNull(KM200RestCall restCall, String service) throws Exception {
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put("value", Float.valueOf(0));
+        restCall.doPostRequest(service, jsonObj.toJSONString());
     }
 }

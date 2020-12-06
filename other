@@ -35,6 +35,7 @@
 /heatingCircuits/hc1/manualRoomSetpoint
 /system/minOutdoorTemp
 
+/heatingCircuits/hc1/suWiThreshold --> Sommer Winter Schwelle
 /heatingCircuits/hc2/suWiSwitchMode --> Summer mode = off
 /heatingCircuits/hc2/temperatureLevels/comfort2 --> intelligente Raumsteuerung AQt
 /heatingCircuits/hc2/temperatureLevels/eco --> only for off
@@ -76,6 +77,9 @@ SuSwitchMode
     "allowedValues" : [ "off", "automatic", "forced" ]
   }
 }
+
+/heatingCircuits/hc1/suWiThreshold
+{"native":{"type":"floatValue","writeable":1,"recordable":0,"unitOfMeasure":"C","minValue":10,"maxValue":30}}
 
 {"ts":1606941731,"val":"auto"}
 

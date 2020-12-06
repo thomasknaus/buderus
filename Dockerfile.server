@@ -1,6 +1,6 @@
 FROM balenalib/raspberrypi3-openjdk:8-jdk
 MAINTAINER knaus thomas
-COPY target/buderus-0.0.1-SNAPSHOT.jar /opt/spring-cloud/lib/
+COPY target/buderus-0.0.3-SNAPSHOT.jar /opt/spring-cloud/lib/
 ENTRYPOINT ["/usr/bin/java"]
-CMD ["-jar", "/opt/spring-cloud/lib/buderus-0.0.1-SNAPSHOT.jar"]
+CMD ["-jar", "/opt/spring-cloud/lib/buderus-0.0.3-SNAPSHOT.jar"]
 EXPOSE 8083
