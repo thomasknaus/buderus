@@ -16,7 +16,7 @@ import javax.xml.bind.DatatypeConverter;
 
 @Service
 @PropertySources({
-        @PropertySource(value = "file:${user.home}/conf/application-buderus.properties",  ignoreResourceNotFound = true)
+        @PropertySource(value = "file:${user.home}/conf/application-buderus.properties",  ignoreResourceNotFound = false)
 })
 public class KM200RestCall {
 
