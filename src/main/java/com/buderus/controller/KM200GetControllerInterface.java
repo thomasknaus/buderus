@@ -24,4 +24,14 @@ public interface KM200GetControllerInterface {
     * Aktuell Außentemperatur --> Intelligente Raumsteuerung AI Eingang
      */
     ResponseEntity<KM200Result> getOutdoorTmp();
+
+    /*
+     * Aktuell Raumtemperatur Heizkreis 1
+     */
+    ResponseEntity<KM200Result> getActualRoomTmpHc1();
+
+    /*
+     * Aktuell Raumtemperatur Heizkreis 2
+     */
+    ResponseEntity<KM200Result> getActualRoomTmpHc2();
 }

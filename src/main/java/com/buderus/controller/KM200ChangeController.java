@@ -4,6 +4,8 @@ import com.buderus.connection.call.KM200RestCall;
 import com.buderus.connection.call.publish.Circuit;
 import com.buderus.connection.call.publish.PushTopics;
 import com.buderus.connection.call.publish.SuWiSwitchMode;
+import com.buderus.connection.call.subscribe.HeatCircuit1;
+import com.buderus.connection.call.subscribe.HeatCircuit2;
 import com.buderus.connection.call.subscribe.SystemValues;
 import com.buderus.connection.config.KM200Result;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -198,10 +200,12 @@ public class KM200ChangeController extends KM200RestHelper implements KM200PutCo
         String message = null;
         HttpStatus status = HttpStatus.OK;
         JSONObject jsonObj = new JSONObject();
+        String comfortTemp = PushTopics.HEATCIRCUITHC2TMPLEVELCOMF2.getDescription();
+        String roomTmp = PushTopics.HEATCIRCUITHC2TEMPOROOMSET.getDescription();
         try {
             jsonObj.put("value", Float.valueOf(tmp));
-            // wo anders hin
-            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC2TMPLEVELCOMF2.getDescription(), jsonObj.toJSONString());
+            message = restCall.doPostRequest(comfortTemp, jsonObj.toJSONString());
+            message = restCall.doPostRequest(roomTmp, jsonObj.toJSONString());
         } catch (Exception e) {
             logger.error("{}", e.getMessage(), e);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -221,14 +225,58 @@ public class KM200ChangeController extends KM200RestHelper implements KM200PutCo
         String message = null;
         HttpStatus status = HttpStatus.OK;
         JSONObject jsonObj = new JSONObject();
+        String comfortTemp = PushTopics.HEATCIRCUITHC1TMPLEVELCOMF2.getDescription();
+        String roomTmp = PushTopics.HEATCIRCUITHC1TEMPOROOMSET.getDescription();
         try {
             jsonObj.put("value", Float.valueOf(tmp));
-            // wo anders hin
-            message = restCall.doPostRequest(PushTopics.HEATCIRCUITHC1TMPLEVELCOMF2.getDescription(), jsonObj.toJSONString());
+            message = restCall.doPostRequest(comfortTemp, jsonObj.toJSONString());
+            message = restCall.doPostRequest(roomTmp, jsonObj.toJSONString());
         } catch (Exception e) {
             logger.error("{}", e.getMessage(), e);
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<String>(message, status);
+    }
+
+    @Override
+    @ApiOperation(value = "Buderus get actual room temperature for heating circuit 1", response = Iterable.class, tags = "buderus")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK", response = String.class),
+            @ApiResponse(code = 204, message = "no content!")})
+    @RequestMapping(value = "/currroomtmphc1", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KM200Result> getActualRoomTmpHc1() {
+        KM200Result result = null;
+        HttpStatus status = HttpStatus.OK;
+        String roomTmp = HeatCircuit1.HEATHC1TEMPROOMSET.getDescription();
+        try {
+            String message = restCall.doGetRequest(roomTmp);
+            final ObjectMapper mapper = new ObjectMapper();
+            result = mapper.readValue(message, KM200Result.class);
+        } catch (Exception e) {
+            logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<KM200Result>(result, status);
+    }
+
+    @Override
+    @ApiOperation(value = "Buderus get actual room temperature for heating circuit 1", response = Iterable.class, tags = "buderus")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK", response = String.class),
+            @ApiResponse(code = 204, message = "no content!")})
+    @RequestMapping(value = "/currroomtmphc2", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<KM200Result> getActualRoomTmpHc2() {
+        KM200Result result = null;
+        HttpStatus status = HttpStatus.OK;
+        String roomTmp = HeatCircuit2.HEATHC2ROOMTMP.getDescription();
+        try {
+            String message = restCall.doGetRequest(roomTmp);
+            final ObjectMapper mapper = new ObjectMapper();
+            result = mapper.readValue(message, KM200Result.class);
+        } catch (Exception e) {
+            logger.error("{}", e.getMessage(), e);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<KM200Result>(result, status);
     }
 }

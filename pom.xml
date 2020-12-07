@@ -10,7 +10,7 @@
     </parent>
     <groupId>de.knaus</groupId>
     <artifactId>buderus</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
     <name>spring-boot</name>
     <description>Demo project for Spring Boot</description>
 

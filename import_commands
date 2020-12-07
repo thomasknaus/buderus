@@ -2,14 +2,14 @@ docker build --file=Dockerfile.server --tag=netatmo:latest --rm=true .
 docker run --name=buderus --publish=8083:8083 netatmo:latest --detach
 
 #artifactory
-docker build --file=Dockerfile.server --tag=thomasknaus1980/buderus:version1.0 --rm=true .
-docker tag <image id> thomasknaus1980/buderus:version1.0
-docker push thomasknaus1980/buderus:version1.0
+docker build --file=Dockerfile.server --tag=thomasknaus1980/buderus:version4.0 --rm=true .
+docker tag <image id> thomasknaus1980/buderus:version4.0
+docker push thomasknaus1980/buderus:version4.0
 
 docker login thomasknaus1980
 
 docker pull thomasknaus1980/buderus:version1.0
-docker run -d -p 8083:8083 --restart unless-stopped --name buderus thomasknaus1980/buderus:version1.0
+docker run -d -p 8083:8083 --restart unless-stopped --name buderus thomasknaus1980/buderus:version4.0
 
 docker commit 9545e071640e buderus
 docker tag buderus localhost:8083
