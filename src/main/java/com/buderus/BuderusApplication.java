@@ -9,7 +9,7 @@ import java.util.Collections;
 
 @SpringBootApplication
 @PropertySources({
-        @PropertySource(value = "file:${HOME}/conf/application-buderus.properties",  ignoreResourceNotFound = true)
+        @PropertySource(value = "file:${user.home}/conf/application-buderus.properties",  ignoreResourceNotFound = true)
 })
 public class BuderusApplication {
 
